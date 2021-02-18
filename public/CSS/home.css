@@ -103,7 +103,7 @@
 
 #customNav nav {
   height: 70%;
-  overflow-y: scroll;
+  padding-bottom: 20px !important;
 }
 
 #navOverlay {
@@ -171,32 +171,31 @@
 @media (max-width: 1200px) {
   #customNav {
     transform: translateX(-250px);
-    padding: 0;
     width: 0;
+    padding: 0;
     border-width: 0 !important;
     position: absolute;
+    overflow-y: scroll;
   }
 
   .hamburger {
     cursor: pointer;
     border: 0;
-    position: absolute;
     left: 0;
-    top: 5px;
+    margin-top: 5px;
     z-index: 50;
-    background-color: transparent;
     outline: none;
     display: block;
+    background-color: transparent;
   }
 
-  #customNav .navTitle {
+  .navTitle {
     display: none !important ;
   }
 
   #customNav nav {
     margin-top: 60px !important;
-    padding-left: 10px !important;
-    height: 100% !important;
+    height: auto;
   }
 
   #header {

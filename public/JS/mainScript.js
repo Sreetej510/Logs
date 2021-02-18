@@ -5,6 +5,14 @@ window.onload = function () {
     }
 }
 
+window.addEventListener("resize", function () {
+    if (document.documentElement.clientWidth >= 1200) {
+        if (document.getElementById('customNav').classList.contains('hamClick')) {
+            menu();
+        }
+    }
+}, true);
+
 
 function collapsedFunction(e) {
     var collapseId = e.getAttribute('data-target');
