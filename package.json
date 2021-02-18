@@ -1,0 +1,14 @@
+{
+  "name": "logs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1"
+  },
+  "keywords": [
+    "logs"
+  ],
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}

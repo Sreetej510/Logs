@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="CSS/bootstrap.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="CSS/home.css" />
+    <link rel="icon" href="Images/log.svg" />
+
+    <title>Ωmega Logs</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.7/firebase-firestore.js"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row row-height">
+        <div id="navOverlay" class="d-none" onclick="menu()"></div>
+        <!-- Navigation -->
+        <div class="container border-right border-3" id="customNav">
+          <!-- Logo and Title -->
+          <div class="navTitle d-flex flex-column justify-content-around pt-5" style="height: 30%">
+            <img class="logoImg pt-3" src="Images/log.svg" />
+            <h3 class="text-center pb-4 border-bottom mx-3 border-dark font_Comic">Logs</h3>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <nav class="navbar navbar-light p-0 align-items-start">
+            <ul class="navbar-nav flex-column px-4 w-100">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="logNav" href="#">Group Name</a>
+              </li>
+              <div class="container bg-light rounded">
+                <div class="navbar-collapse collapse ml-auto" id="logNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item border-bottom">
+                      <a class="nav-link" href="#">Log 1</a>
+                    </li>
+                    <li class="nav-item border-bottom">
+                      <a class="nav-link" href="#">Log 2</a>
+                    </li>
+                    <li class="nav-item border-bottom">
+                      <a class="nav-link" href="#">Log 3</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Log 4</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <li class="nav-item">
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="logNav2" href="#">Group Name 2</a>
+              </li>
+              <div class="container bg-light rounded">
+                <div class="navbar-collapse collapse ml-auto" id="logNav2">
+                  <ul class="navbar-nav">
+                    <li class="nav-item border-bottom">
+                      <a class="nav-link" href="#">Log 1</a>
+                    </li>
+                    <li class="nav-item border-bottom">
+                      <a class="nav-link" href="#">Log 2</a>
+                    </li>
+                    <li class="nav-item border-bottom">
+                      <a class="nav-link" href="#">Log 3</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Log 4</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Main Page -->
+        <div class="container col right">
+          <header class="w-100 bg-white fixed-top mx-0" id="header">
+            <img class="img-responsive py-2" src="Images/log.svg" style="width: 20px" />
+            <span class="h5 align-middle px-3 font_Comic">Logs</span>
+          </header>
+          <button class="hamburger" type="button" onclick="menu()">
+            <svg class="ham hamRotate" id="ham" viewBox="0 0 100 100" width="40">
+              <path class="line top" d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -24" />
+              <path class="line middle" d="m 70,46 h -40" />
+              <path class="line bottom" d="m 30,59 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 24" />
+            </svg>
+          </button>
+
+          <div class="row row-centered mainBG">
+            <div class="w-100 h-100"></div>
+            <h1 class="col position-absolute titleHome"><span class="display-5 d-flex justify-content-center font_Comic">Home</span></h1>
+          </div>
+          <div class="container">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab enim inventore harum voluptate porro dicta impedit consectetur nisi saepe
+              unde quam eos libero eligendi in illo veniam ipsum eum assumenda fuga ipsam voluptatibus sequi, fugit quae. Repellat illum, aut porro
+              illo minima voluptas ex saepe? Veniam nemo repellendus at. Odit architecto, iure molestias ex impedit, repellendus odio sapiente
+              obcaecati debitis illo officiis. Similique inventore, impedit eos id odit, quaerat ducimus perspiciatis suscipit quam corrupti placeat
+              aspernatur esse. Aut exercitationem animi, quisquam consequuntur, hic at officiis nam dignissimos voluptates aspernatur amet sit? Libero
+              rem cupiditate iure repellendus, aspernatur tempora qui repellat necessitatibus beatae a atque distinctio provident, nam unde cum, quae
+              modi in magni repudiandae? Animi aspernatur tempore porro quaerat reiciendis reprehenderit ab sed minus architecto accusantium.
+              Excepturi ad fugit voluptatem illum beatae tempora, temporibus incidunt ex blanditiis voluptate, hic deserunt vero magni! Doloribus
+              debitis eaque distinctio ut ex! Vitae aspernatur neque quasi nobis natus qui earum necessitatibus iusto, nesciunt repellendus maxime
+              suscipit accusamus perferendis? Deserunt illum officiis, voluptatem labore dolore facilis odio vitae omnis, quis nulla dolores ut maxime
+              in dignissimos. Ipsam exercitationem voluptatem id quidem magni tempora facilis fuga culpa corrupti, dolorem eum natus ducimus delectus
+              omnis maiores, recusandae quae, dolores at. Corrupti aliquid reiciendis libero nihil iure qui numquam ducimus! Necessitatibus beatae ab
+              expedita quam non placeat dolorum natus sint, odio illum inventore accusamus perspiciatis doloremque eos, iusto deserunt facere fugit
+              nobis dicta delectus minus nesciunt qui. Quos illum ipsum placeat consequatur repudiandae, nostrum tenetur nemo cupiditate error vitae
+              fugit quasi culpa, quae facere animi! Suscipit similique nihil dicta, nesciunt esse quibusdam eum quidem cupiditate temporibus amet nam,
+              ab illo eaque inventore expedita. Ratione voluptates earum accusamus deserunt iusto porro itaque sit ducimus nam aut provident quasi quo
+              debitis maiores, at vitae! Blanditiis neque laborum iusto non impedit nesciunt quibusdam aspernatur ipsam inventore placeat sapiente
+              quam deserunt, temporibus assumenda esse et ab quidem, similique rem doloribus minima odit? Eius id aperiam, placeat debitis voluptatem
+              blanditiis facere perspiciatis libero quas doloremque quaerat in, deleniti iste eos itaque doloribus saepe hic, accusamus odit!
+              Consequuntur quidem pariatur rem quae dicta facilis ducimus explicabo itaque deleniti alias odio culpa illo nihil, facere, vel atque,
+              dolor officiis sunt corrupti eius et totam doloremque dolorum. Ullam suscipit totam veritatis corporis, eligendi atque optio voluptatem
+              unde adipisci, quos quia provident sapiente iure. Corporis possimus quam vero adipisci itaque animi at maxime numquam facere fugit
+              minima inventore soluta aut quibusdam praesentium unde mollitia, est, temporibus aliquid! Natus, molestiae id porro dicta reiciendis a
+              deserunt! Ut esse inventore amet necessitatibus delectus vero doloribus! Aspernatur vitae ipsum necessitatibus voluptas soluta
+              reprehenderit tempora cupiditate voluptatum? Pariatur odio repudiandae assumenda beatae molestias fugiat vero, incidunt dolor et
+              expedita laboriosam ipsa quo tenetur repellendus est voluptas hic? Voluptatem dicta officia dolore aliquid quam, aspernatur perferendis
+              sequi recusandae alias nemo ex beatae, fuga omnis minus? Repellat sunt cumque eius magnam, ipsum praesentium voluptate. Fugiat,
+              blanditiis! Debitis earum in doloremque aspernatur deleniti, animi ipsa adipisci, vel quod nostrum minima necessitatibus repellendus
+              nihil magnam autem consectetur hic ullam cumque. Veritatis qui fugiat quo officiis sed, quibusdam doloremque obcaecati, alias vitae non
+              consequuntur dolor laboriosam a voluptatem quasi dolore tenetur, ea saepe ipsa distinctio? Sed nisi enim, ratione est vero error ipsum,
+              aliquid doloribus illum harum illo tenetur. A consectetur animi nobis doloremque laboriosam quia, assumenda facere, vitae inventore quo
+              fuga pariatur autem hic rerum. Quisquam, sunt molestias! Explicabo sit quaerat facilis quibusdam labore commodi ipsa autem ex quis
+              iusto, rerum dolores, maxime eius dignissimos ab sunt! Recusandae incidunt ut modi repellendus laudantium, suscipit nisi enim
+              perspiciatis illo reprehenderit. Veniam perferendis, quidem odio optio dolorum accusamus quaerat ipsum reprehenderit voluptatibus
+              praesentium sequi. Neque magnam distinctio necessitatibus consequatur illo dignissimos quas quisquam minima, expedita, in harum pariatur
+              aperiam quam aut. Laudantium consequatur labore quibusdam explicabo! Deserunt tenetur odit omnis natus, accusamus tempore voluptatibus
+              tempora nihil. Blanditiis, maxime aliquam illo aspernatur earum omnis voluptatum fugit ea ratione natus nostrum porro expedita nesciunt
+              nam. Nisi, impedit harum facilis optio facere consectetur, neque fugit doloremque distinctio minus eius assumenda rem animi? Explicabo,
+              accusantium magnam nobis natus ut iure accusamus deserunt quia! Consequatur, numquam accusamus ipsum sunt magnam ut sed neque,
+              voluptates necessitatibus cumque deserunt atque perferendis officiis vero tenetur dolor? Iure quisquam totam nostrum magnam, dignissimos
+              vel ipsam eos explicabo fuga fugiat animi corporis veritatis iste porro? Quia repudiandae ducimus libero culpa nesciunt, laboriosam
+              natus vel qui. Pariatur dicta iste, voluptatum tenetur ab nulla laboriosam asperiores expedita, qui totam debitis eius distinctio
+              repellat, error iusto libero nihil ad voluptate amet. Enim dolorem laborum iusto unde cum labore deserunt quos voluptatibus quas
+              eligendi placeat assumenda numquam temporibus, id nostrum neque. Magni debitis ratione deleniti porro nobis illo eveniet aliquam dolor,
+              dolores, qui quae, deserunt iusto excepturi! Architecto modi eos, omnis velit tempore sunt nostrum saepe, corrupti pariatur placeat enim
+              repellendus quas ipsum cumque iure illo voluptatibus cupiditate adipisci laudantium distinctio quam perferendis, similique hic.
+              Architecto accusamus iure explicabo sunt facilis impedit consectetur hic in, voluptate voluptatem! Obcaecati, totam maxime quibusdam
+              corrupti doloremque odio consequuntur in id alias at veritatis sunt iusto atque nulla numquam doloribus dolorum eius enim suscipit!
+              Autem doloremque veritatis animi sunt quo, illum quam repellat ipsa incidunt consequatur, minus sit laboriosam. Repudiandae minus,
+              rerum, esse tempora laborum impedit veniam temporibus delectus laboriosam cupiditate sequi ullam nemo dolor, incidunt placeat ad dolorem
+              id atque molestiae veritatis itaque quam quas magni! Quibusdam, magnam voluptas placeat libero, nam at modi voluptates aperiam cum amet
+              fuga quam vitae veniam rem labore laborum eius quo doloremque quasi consequuntur aut doloribus dignissimos. Placeat optio molestiae odio
+              ipsa, pariatur adipisci hic, dignissimos temporibus accusamus ut culpa ducimus magni nemo vero laborum magnam eius natus quis doloremque
+              similique sunt. Nulla fugit, maiores blanditiis nihil, placeat quas fuga impedit quia consectetur deleniti vitae tenetur veritatis
+              ratione! Aliquam dolore tempore repellendus repudiandae nihil, reiciendis rerum temporibus nostrum. Tempore nisi fuga sint, aliquid eius
+              doloremque beatae ut deleniti eos sed dolorum fugiat tenetur quae voluptas perferendis harum ullam pariatur atque. Ipsam vitae
+              consectetur vero inventore, quibusdam ea fuga.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="JS/mainScript.js"></script>
+  </body>
+</html>

@@ -1,0 +1,218 @@
+* {
+  -ms-overflow-style: none !important;
+}
+
+.row-height {
+  height: 100vh;
+}
+
+.container {
+  background-color: white;
+}
+
+.border-3 {
+  border-width: 3px !important;
+}
+
+.row [class*="col-"] {
+  transition: all 1s ease-in-out;
+}
+
+.navTitle {
+  height: 30%;
+}
+
+.font_Roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.logoImg {
+  max-width: 25px;
+  min-width: 20px;
+  align-self: center;
+}
+
+.font_Comic {
+  font-family: "Comic Sans MS", "Comic Sans";
+}
+
+.mainBG {
+  overflow: hidden;
+  height: 310px;
+}
+
+.mainBG div {
+  background-size: cover;
+  background-position: center center;
+  background-image: url("../Images/book.jpg");
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.mainBG div::before {
+  background-color: white;
+  opacity: 0.4;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  display: block;
+  content: "";
+}
+
+.titleHome {
+  align-self: center !important;
+}
+
+.titleHome span {
+  margin: 1rem;
+}
+
+.titleHome::after {
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-color: rgba(141, 87, 220);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  display: block;
+  content: "";
+}
+
+.right {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+#customNav {
+  width: 250px;
+  transition: all 0.5s ease-in-out;
+  z-index: 5;
+  height: 100%;
+}
+
+#customNav.hamClick {
+  position: absolute;
+  width: 250px;
+  transform: translateX(0px);
+}
+
+#customNav nav {
+  height: 70%;
+  overflow-y: scroll;
+}
+
+#navOverlay {
+  position: absolute;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  height: 100vh;
+  opacity: 0.4;
+  background-color: #444;
+}
+
+#header {
+  padding-left: 60px;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.hamburger {
+  display: none;
+}
+
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #000;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.ham .top {
+  stroke-dasharray: 40 121;
+}
+.ham .bottom {
+  stroke-dasharray: 40 121;
+}
+.ham.active .top {
+  stroke-dashoffset: -90px;
+}
+.ham.active .bottom {
+  stroke-dashoffset: -90px;
+}
+
+.opacity-0h5 {
+  opacity: 0 !important;
+  transition: opacity 0.25s ease-in-out !important;
+  -moz-transition: opacity 0.25s ease-in-out !important;
+  -webkit-transition: opacity 0.25s ease-in-out !important;
+}
+
+@media (max-width: 1200px) {
+  #customNav {
+    transform: translateX(-250px);
+    padding: 0;
+    width: 0;
+    border-width: 0 !important;
+    position: absolute;
+  }
+
+  .hamburger {
+    cursor: pointer;
+    border: 0;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    z-index: 50;
+    background-color: transparent;
+    outline: none;
+    display: block;
+  }
+
+  #customNav .navTitle {
+    display: none !important ;
+  }
+
+  #customNav nav {
+    margin-top: 60px !important;
+    padding-left: 10px !important;
+    height: 100% !important;
+  }
+
+  #header {
+    opacity: 1;
+    height: auto;
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .mainBG {
+    height: 280px;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .mainBG {
+    height: 250px;
+  }
+}
