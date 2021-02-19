@@ -1,0 +1,39 @@
+{
+    "name":"Logs",
+    "start_url":"/index.html",
+    "scope":".",
+    "display":"standalone",
+    "background_color":"#fff",
+    "theme_color":"#fff",
+    "description":"My own Logs",
+    "dir":"ltr",
+    "lang":"en-US",
+    "orientation":"any",
+    "icons":[
+        {
+            "src":"/Images/Icons/logo_196x196.png",
+            "type":"image/png",
+            "sizes":"196x196"
+        },
+        {
+            "src":"/Images/Icons/logo_392x392.png",
+            "type":"image/png",
+            "sizes":"392x392"
+        },
+        {
+            "src":"/Images/Icons/logo_522x522.png",
+            "type":"image/png",
+            "sizes":"522x522"
+        },
+        {
+            "src":"/Images/Icons/logo_783x783.png",
+            "type":"image/png",
+            "sizes":"783x783"
+        },
+        {
+            "src":"/Images/Icons/logo_1044x1044.png",
+            "type":"image/png",
+            "sizes":"1044x1044"
+        }       
+    ]
+}
