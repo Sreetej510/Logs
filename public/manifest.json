@@ -1,14 +1,13 @@
 {
-    "name":"Logs",
-    "start_url":"/index.html",
-    "scope":".",
-    "display":"standalone",
+    "name": "Logs",
+    "short_name": "Logs",
+    "description": "My Logs App",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "any",
+    "lang": "English",
     "background_color":"#fff",
     "theme_color":"#fff",
-    "description":"My own Logs",
-    "dir":"ltr",
-    "lang":"en-US",
-    "orientation":"any",
     "icons":[
         {
             "src":"/Images/Icons/logo_196x196.png",
