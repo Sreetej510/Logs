@@ -33,6 +33,12 @@
             "src":"/Images/Icons/logo_1044x1044.png",
             "type":"image/png",
             "sizes":"1044x1044"
-        }       
+        },   
+        {
+            "src":"/Images/Icons/logo_solid.png",
+            "type":"image/png", 
+            "sizes":"1024x1024",
+            "purpose":"maskable"
+        }   
     ]
 }
