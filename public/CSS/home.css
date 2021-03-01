@@ -337,3 +337,9 @@
     width: 70%;
   }
 }
+
+@media (hover: none) {
+  .searchBar button:hover {
+    background-color: transparent;
+  }
+}

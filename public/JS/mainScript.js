@@ -47,11 +47,3 @@ function menu() {
     document.getElementById('ham').classList.toggle('active');
     document.getElementById('header').classList.toggle('opacity-0h5');
 }
-
-function searchMenu() {
-    document.getElementById("searchOverlay").classList.toggle("hidden");
-}
-
-function searchClear() {
-    document.getElementById("searchInput").value = "";
-}
