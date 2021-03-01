@@ -1,5 +1,5 @@
 [{
       "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "app.web.logs_353b7.twa",
-                   "sha256_cert_fingerprints": ["C6:5A:8F:7D:7E:69:10:6D:07:32:ED:D2:D6:7C:F0:C3:6F:02:D6:98:24:95:E2:30:A0:88:B3:CC:C4:A8:3B:52"] }
+      "target" : { "namespace": "android_app", "package_name": "com.omegarts.logs",
+                   "sha256_cert_fingerprints": ["4D:C5:39:0F:5C:3F:7A:29:FA:17:D0:05:B0:E9:AE:52:D6:14:D0:40:2D:30:41:F2:FC:7B:57:CA:90:1D:09:21"] }
     }]

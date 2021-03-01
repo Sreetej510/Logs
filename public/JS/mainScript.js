@@ -13,7 +13,6 @@ window.addEventListener("resize", function () {
     }
 }, true);
 
-
 function collapsedFunction(e) {
     var collapseId = e.getAttribute('data-target');
     var item = document.getElementById(collapseId);
@@ -47,4 +46,12 @@ function menu() {
     document.getElementById('navOverlay').classList.toggle('d-none');
     document.getElementById('ham').classList.toggle('active');
     document.getElementById('header').classList.toggle('opacity-0h5');
+}
+
+function searchMenu() {
+    document.getElementById("searchOverlay").classList.toggle("hidden");
+}
+
+function searchClear() {
+    document.getElementById("searchInput").value = "";
 }

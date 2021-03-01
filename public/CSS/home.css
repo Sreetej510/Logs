@@ -169,6 +169,99 @@
   -webkit-transition: opacity 0.25s ease-in-out !important;
 }
 
+.searchIcon {
+  position: fixed;
+  z-index: 120;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  top: 15px;
+}
+
+.searchIconBG {
+  position: absolute;
+  background-color: white;
+  width: 80px;
+  height: 40px;
+  top: -5px;
+  left: -5px;
+  z-index: -10;
+  border-radius: 50px;
+  box-shadow: 1px 1px 3px #000000;
+}
+
+#searchOverlay {
+  position: absolute;
+  z-index: 150;
+  height: 100%;
+  width: 100%;
+  background-color: #21212180;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.searchBarContainer {
+  height: 70px;
+  width: 100%;
+  background-color: #eeeeee;
+  position: absolute;
+  display: inline;
+  min-width: 100px !important;
+}
+
+.searchBar {
+  height: 45px;
+  width: 50%;
+  margin-top: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+.searchBar button {
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2.5px;
+}
+
+.searchBar button:hover {
+  background-color: #5553;
+}
+
+.backBtn {
+  position: absolute;
+  left: 30px;
+  background-color: transparent;
+  border: none;
+}
+
+.enterSearch,
+.clearSearch,
+.backSearch {
+  width: 24px;
+  height: 24px;
+}
+
+.searchBar Input {
+  position: absolute;
+  border: none;
+  outline: none;
+  width: 43%;
+  margin-top: 10px;
+}
+
+.clearSearchBtn {
+  position: absolute;
+  right: 25%;
+}
+
 @media (max-width: 1200px) {
   #customNav {
     transform: translateX(-250px);
@@ -189,6 +282,10 @@
     background-color: transparent;
   }
 
+  .searchIconBG {
+    width: 0;
+  }
+
   .navTitle {
     display: none !important ;
   }
@@ -203,6 +300,28 @@
     height: auto;
     transition: all 0.5s ease-in-out;
   }
+  .searchIcon {
+    top: 10px !important  ;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .searchBar {
+    width: 95%;
+  }
+  .enterSearchBtn {
+    display: none;
+  }
+  .backBtn {
+    position: relative !important;
+    left: 0 !important;
+  }
+  .searchBar Input {
+    width: 80%;
+  }
+  .clearSearchBtn {
+    right: 10px !important;
+  }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -213,5 +332,8 @@
 @media only screen and (max-width: 479px) {
   .mainBG {
     height: 250px;
+  }
+  .searchBar Input {
+    width: 70%;
   }
 }

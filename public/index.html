@@ -13,14 +13,41 @@
     <link rel="icon" href="Images/log.svg" />
 
     <title>Ωmega Logs</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.2.7/firebase-firestore.js"></script>
   </head>
 
   <body>
+    <div id="searchOverlay">
+      <div class="position-absolute h-100 w-100" onclick="searchMenu()"></div>
+      <div class="searchBarContainer">
+        <div class="searchBar">
+          <button onclick="searchMenu()" class="backBtn">
+            <svg class="backSearch">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+            </svg>
+          </button>
+
+          <button onclick="search()" class="enterSearchBtn">
+            <svg class="enterSearch">
+              <path
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l
+              5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+              ></path>
+            </svg>
+          </button>
+
+          <input placeholder="Search this site" id="searchInput" />
+
+          <button onclick="searchClear()" class="clearSearchBtn">
+            <svg class="clearSearch">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+              <path d="M0 0h24v24H0z" fill="none"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="container-fluid">
       <div class="row row-height">
         <div id="navOverlay" class="d-none" onclick="menu()"></div>
@@ -120,75 +147,88 @@
             </svg>
           </button>
 
+          <button class="searchIcon" onclick="searchMenu()">
+            <svg style="width: 24px; height: 24px">
+              <path
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l
+                5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+              ></path>
+            </svg>
+
+            <div class="searchIconBG"></div>
+          </button>
+
           <div class="row row-centered mainBG">
             <div class="w-100 h-100"></div>
             <h1 class="col position-absolute titleHome"><span class="display-5 d-flex justify-content-center font_Comic">Home</span></h1>
           </div>
-          <div class="container">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab enim inventore harum voluptate porro dicta impedit consectetur nisi saepe
-              unde quam eos libero eligendi in illo veniam ipsum eum assumenda fuga ipsam voluptatibus sequi, fugit quae. Repellat illum, aut porro
-              illo minima voluptas ex saepe? Veniam nemo repellendus at. Odit architecto, iure molestias ex impedit, repellendus odio sapiente
-              obcaecati debitis illo officiis. Similique inventore, impedit eos id odit, quaerat ducimus perspiciatis suscipit quam corrupti placeat
-              aspernatur esse. Aut exercitationem animi, quisquam consequuntur, hic at officiis nam dignissimos voluptates aspernatur amet sit? Libero
-              rem cupiditate iure repellendus, aspernatur tempora qui repellat necessitatibus beatae a atque distinctio provident, nam unde cum, quae
-              modi in magni repudiandae? Animi aspernatur tempore porro quaerat reiciendis reprehenderit ab sed minus architecto accusantium.
-              Excepturi ad fugit voluptatem illum beatae tempora, temporibus incidunt ex blanditiis voluptate, hic deserunt vero magni! Doloribus
-              debitis eaque distinctio ut ex! Vitae aspernatur neque quasi nobis natus qui earum necessitatibus iusto, nesciunt repellendus maxime
-              suscipit accusamus perferendis? Deserunt illum officiis, voluptatem labore dolore facilis odio vitae omnis, quis nulla dolores ut maxime
-              in dignissimos. Ipsam exercitationem voluptatem id quidem magni tempora facilis fuga culpa corrupti, dolorem eum natus ducimus delectus
-              omnis maiores, recusandae quae, dolores at. Corrupti aliquid reiciendis libero nihil iure qui numquam ducimus! Necessitatibus beatae ab
-              expedita quam non placeat dolorum natus sint, odio illum inventore accusamus perspiciatis doloremque eos, iusto deserunt facere fugit
-              nobis dicta delectus minus nesciunt qui. Quos illum ipsum placeat consequatur repudiandae, nostrum tenetur nemo cupiditate error vitae
-              fugit quasi culpa, quae facere animi! Suscipit similique nihil dicta, nesciunt esse quibusdam eum quidem cupiditate temporibus amet nam,
-              ab illo eaque inventore expedita. Ratione voluptates earum accusamus deserunt iusto porro itaque sit ducimus nam aut provident quasi quo
-              debitis maiores, at vitae! Blanditiis neque laborum iusto non impedit nesciunt quibusdam aspernatur ipsam inventore placeat sapiente
-              quam deserunt, temporibus assumenda esse et ab quidem, similique rem doloribus minima odit? Eius id aperiam, placeat debitis voluptatem
-              blanditiis facere perspiciatis libero quas doloremque quaerat in, deleniti iste eos itaque doloribus saepe hic, accusamus odit!
-              Consequuntur quidem pariatur rem quae dicta facilis ducimus explicabo itaque deleniti alias odio culpa illo nihil, facere, vel atque,
-              dolor officiis sunt corrupti eius et totam doloremque dolorum. Ullam suscipit totam veritatis corporis, eligendi atque optio voluptatem
-              unde adipisci, quos quia provident sapiente iure. Corporis possimus quam vero adipisci itaque animi at maxime numquam facere fugit
-              minima inventore soluta aut quibusdam praesentium unde mollitia, est, temporibus aliquid! Natus, molestiae id porro dicta reiciendis a
-              deserunt! Ut esse inventore amet necessitatibus delectus vero doloribus! Aspernatur vitae ipsum necessitatibus voluptas soluta
-              reprehenderit tempora cupiditate voluptatum? Pariatur odio repudiandae assumenda beatae molestias fugiat vero, incidunt dolor et
-              expedita laboriosam ipsa quo tenetur repellendus est voluptas hic? Voluptatem dicta officia dolore aliquid quam, aspernatur perferendis
-              sequi recusandae alias nemo ex beatae, fuga omnis minus? Repellat sunt cumque eius magnam, ipsum praesentium voluptate. Fugiat,
-              blanditiis! Debitis earum in doloremque aspernatur deleniti, animi ipsa adipisci, vel quod nostrum minima necessitatibus repellendus
-              nihil magnam autem consectetur hic ullam cumque. Veritatis qui fugiat quo officiis sed, quibusdam doloremque obcaecati, alias vitae non
-              consequuntur dolor laboriosam a voluptatem quasi dolore tenetur, ea saepe ipsa distinctio? Sed nisi enim, ratione est vero error ipsum,
-              aliquid doloribus illum harum illo tenetur. A consectetur animi nobis doloremque laboriosam quia, assumenda facere, vitae inventore quo
-              fuga pariatur autem hic rerum. Quisquam, sunt molestias! Explicabo sit quaerat facilis quibusdam labore commodi ipsa autem ex quis
-              iusto, rerum dolores, maxime eius dignissimos ab sunt! Recusandae incidunt ut modi repellendus laudantium, suscipit nisi enim
-              perspiciatis illo reprehenderit. Veniam perferendis, quidem odio optio dolorum accusamus quaerat ipsum reprehenderit voluptatibus
-              praesentium sequi. Neque magnam distinctio necessitatibus consequatur illo dignissimos quas quisquam minima, expedita, in harum pariatur
-              aperiam quam aut. Laudantium consequatur labore quibusdam explicabo! Deserunt tenetur odit omnis natus, accusamus tempore voluptatibus
-              tempora nihil. Blanditiis, maxime aliquam illo aspernatur earum omnis voluptatum fugit ea ratione natus nostrum porro expedita nesciunt
-              nam. Nisi, impedit harum facilis optio facere consectetur, neque fugit doloremque distinctio minus eius assumenda rem animi? Explicabo,
-              accusantium magnam nobis natus ut iure accusamus deserunt quia! Consequatur, numquam accusamus ipsum sunt magnam ut sed neque,
-              voluptates necessitatibus cumque deserunt atque perferendis officiis vero tenetur dolor? Iure quisquam totam nostrum magnam, dignissimos
-              vel ipsam eos explicabo fuga fugiat animi corporis veritatis iste porro? Quia repudiandae ducimus libero culpa nesciunt, laboriosam
-              natus vel qui. Pariatur dicta iste, voluptatum tenetur ab nulla laboriosam asperiores expedita, qui totam debitis eius distinctio
-              repellat, error iusto libero nihil ad voluptate amet. Enim dolorem laborum iusto unde cum labore deserunt quos voluptatibus quas
-              eligendi placeat assumenda numquam temporibus, id nostrum neque. Magni debitis ratione deleniti porro nobis illo eveniet aliquam dolor,
-              dolores, qui quae, deserunt iusto excepturi! Architecto modi eos, omnis velit tempore sunt nostrum saepe, corrupti pariatur placeat enim
-              repellendus quas ipsum cumque iure illo voluptatibus cupiditate adipisci laudantium distinctio quam perferendis, similique hic.
-              Architecto accusamus iure explicabo sunt facilis impedit consectetur hic in, voluptate voluptatem! Obcaecati, totam maxime quibusdam
-              corrupti doloremque odio consequuntur in id alias at veritatis sunt iusto atque nulla numquam doloribus dolorum eius enim suscipit!
-              Autem doloremque veritatis animi sunt quo, illum quam repellat ipsa incidunt consequatur, minus sit laboriosam. Repudiandae minus,
-              rerum, esse tempora laborum impedit veniam temporibus delectus laboriosam cupiditate sequi ullam nemo dolor, incidunt placeat ad dolorem
-              id atque molestiae veritatis itaque quam quas magni! Quibusdam, magnam voluptas placeat libero, nam at modi voluptates aperiam cum amet
-              fuga quam vitae veniam rem labore laborum eius quo doloremque quasi consequuntur aut doloribus dignissimos. Placeat optio molestiae odio
-              ipsa, pariatur adipisci hic, dignissimos temporibus accusamus ut culpa ducimus magni nemo vero laborum magnam eius natus quis doloremque
-              similique sunt. Nulla fugit, maiores blanditiis nihil, placeat quas fuga impedit quia consectetur deleniti vitae tenetur veritatis
-              ratione! Aliquam dolore tempore repellendus repudiandae nihil, reiciendis rerum temporibus nostrum. Tempore nisi fuga sint, aliquid eius
-              doloremque beatae ut deleniti eos sed dolorum fugiat tenetur quae voluptas perferendis harum ullam pariatur atque. Ipsam vitae
-              consectetur vero inventore, quibusdam ea fuga.
-            </p>
+
+          <div class="mt-5 card-columns" style="display: inline-block">
+            <div class="card">
+              <img class="card-img-top" src="Images/book.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <p class="card-text">
+                  Some quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's content.Some quick
+                  example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's contentSome quick example tdwd
+                  ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's content
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="Images/book.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <p class="card-text">Some quick example ted axt to build on the card title da and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <img class="card-img-top" src="Images/book.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <p class="card-text">
+                  Some quic Some quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's
+                  content.Some quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's contentSome
+                  quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's contentk example text to
+                  build on the card title and make up the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="Images/book.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <p class="card-text">
+                  Some quic Some quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's
+                  content.Some quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's contentSome
+                  quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's contentk example text to
+                  build on the card title and make up the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="Images/book.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <p class="card-text">
+                  Some quick exampleSome quic Some quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the
+                  card's content.Some quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's
+                  contentSome quick example tdwd ad wad a dwa dad aw dext to build on the card title and make up the bulk of the card's contentk
+                  example text to build on the card title and make up the bulk of the card's content. text to build on the card title and make up the
+                  bulk of the card's content.
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="Images/book.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <p class="card-text">Some quick example text ake up the bulk of the card's content.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <script src="JS/app.js"></script>
     <script src="JS/mainScript.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
   </body>
 </html>
