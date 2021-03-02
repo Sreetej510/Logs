@@ -16,11 +16,12 @@
   </head>
 
   <body>
+    <!-- Search Menu -->
     <div id="searchOverlay" class="hidden">
-      <div class="position-absolute h-100 w-100" onclick="searchMenu()"></div>
+      <div class="position-absolute h-100 w-100" onclick="searchMenuToggle()"></div>
       <div class="searchBarContainer">
-        <div class="searchBar">
-          <button onclick="searchMenu()" class="backBtn">
+        <form class="searchBar" id="searchBar">
+          <button onclick="searchMenuToggle()" class="backBtn">
             <svg class="backSearch">
               <path d="M0 0h24v24H0z" fill="none"></path>
               <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
@@ -36,7 +37,7 @@
             </svg>
           </button>
 
-          <input placeholder="Search this site" id="searchInput" oninput="searchChange(this)" onkeydown="searchEnter(event)" />
+          <input type="text" placeholder="Search this site" id="searchInput" oninput="searchChange(this)" />
 
           <button onclick="searchClear()" class="clearSearchBtn" id="clearSearchBtn" style="display: none">
             <svg class="clearSearch">
@@ -44,13 +45,14 @@
               <path d="M0 0h24v24H0z" fill="none"></path>
             </svg>
           </button>
-        </div>
+        </form>
       </div>
     </div>
 
     <div class="container-fluid">
       <div class="row row-height">
         <div id="navOverlay" class="d-none" onclick="menu()"></div>
+
         <!-- Navigation -->
         <div class="container border-right border-3" id="customNav">
           <!-- Logo and Title -->
@@ -147,7 +149,7 @@
             </svg>
           </button>
 
-          <button class="searchIcon" onclick="searchMenu()">
+          <button class="searchIcon" onclick="searchMenuToggle()">
             <svg style="width: 24px; height: 24px">
               <path
                 d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l

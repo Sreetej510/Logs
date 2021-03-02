@@ -47,3 +47,7 @@ function menu() {
     document.getElementById('ham').classList.toggle('active');
     document.getElementById('header').classList.toggle('opacity-0h5');
 }
+
+function searchMenuToggle() {
+    document.getElementById("searchOverlay").classList.toggle("hidden");
+}

@@ -1,8 +1,4 @@
 
-function searchMenu() {
-    document.getElementById("searchOverlay").classList.toggle("hidden");
-}
-
 function searchClear() {
     document.getElementById("searchInput").value = "";
     var e = document.getElementById('searchInput');
@@ -17,16 +13,16 @@ function searchChange(e) {
     }
 }
 
-function searchEnter(e) {
-    if (e.code == 'Enter') {
-        search();
-    }
-}
+document.getElementById('searchBar').addEventListener('submit', function (event) {
+    event.preventDefault();
+    search();
+});
 
 function search() {
     var searchText = document.getElementById('searchInput').value;
     var origin = window.location.origin;
-    window.location = origin + '/public/search.html?search=' + searchText
+    searchMenuToggle();
+    window.location = origin + 'search.html?search=' + searchText;
 }
 
 function goBack() {

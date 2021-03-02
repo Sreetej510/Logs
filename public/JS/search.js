@@ -20,6 +20,5 @@ function retrieve(text, data) {
                 console.log(data[ele]['name'])
             }
         }
-
     };
 }
