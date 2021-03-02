@@ -2,6 +2,7 @@ window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('search');
     getDocs(myParam);
+    document.getElementById('searchInput').value = myParam;
 }
 
 function getDocs(myParam) {

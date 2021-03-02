@@ -1,0 +1,114 @@
+#searchOverlay {
+  position: absolute;
+  z-index: 150;
+  height: 100%;
+  width: 100%;
+  background-color: #5553;
+}
+
+.searchBarContainer {
+  height: 70px;
+  width: 100%;
+  background-color: #eeeeee;
+  position: fixed;
+  display: inline;
+  min-width: 100px !important;
+  transition: all 0.18s ease;
+  transform: translateY(0px);
+}
+
+.translate_70 {
+  transform: translateY(-70px) !important;
+}
+
+.searchBar {
+  height: 45px;
+  width: 50%;
+  margin-top: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+.searchBarShadow {
+  box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 20%);
+}
+
+.searchBar button {
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2.5px;
+}
+
+.searchBar button:hover {
+  background-color: #5553;
+}
+
+.backBtn {
+  position: absolute;
+  left: 30px;
+  background-color: transparent;
+  border: none;
+}
+
+.enterSearch,
+.clearSearch,
+.backSearch {
+  width: 24px;
+  height: 24px;
+}
+
+.searchBar Input {
+  position: absolute;
+  border: none;
+  outline: none;
+  width: 43%;
+  margin-top: 10px;
+}
+
+.clearSearchBtn {
+  position: absolute;
+  right: 25%;
+}
+
+@media (max-width: 1200px) {
+  .searchIcon {
+    top: 10px !important  ;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .searchBar {
+    width: 95%;
+  }
+  .enterSearchBtn {
+    display: none;
+  }
+  .backBtn {
+    position: relative !important;
+    left: 0 !important;
+  }
+  .searchBar Input {
+    width: 80%;
+  }
+  .clearSearchBtn {
+    right: 10px !important;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .searchBar Input {
+    width: 70%;
+  }
+}
+
+@media (hover: none) {
+  .searchBar button:hover {
+    background-color: transparent;
+  }
+}

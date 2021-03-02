@@ -1,4 +1,3 @@
-
 function searchClear() {
     document.getElementById("searchInput").value = "";
     var e = document.getElementById('searchInput');
@@ -21,10 +20,23 @@ document.getElementById('searchBar').addEventListener('submit', function (event)
 function search() {
     var searchText = document.getElementById('searchInput').value;
     var origin = window.location.origin;
-    searchMenuToggle();
-    window.location = origin + 'search.html?search=' + searchText;
+    const urlParams = new URLSearchParams(window.location.search);
+    var fromMain = urlParams.get("fromMain");
+    if (fromMain == null) {
+        window.location = origin + '/search.html?search=' + searchText + '&fromMain=true';
+    } else {
+        window.location.replace(origin + '/search.html?search=' + searchText + '&fromMain=false');
+    }
 }
 
 function goBack() {
-    window.history.back();
+    window.history.back()
 }
+
+window.addEventListener('scroll', function () {
+    if (document.body.scrollTop === 0) {
+        document.getElementById('searchBarContainer').classList.remove('searchBarShadow');
+    } else {
+        document.getElementById('searchBarContainer').classList.add('searchBarShadow');
+    }
+});

@@ -1,4 +1,5 @@
 window.onload = function () {
+    document.getElementById('searchInput').value = '';
     elements = document.getElementsByClassName('collapsed');
     for (var i = 0; i < elements.length; i++) {
         elements[i].onclick = function () { collapsedFunction(this); };
@@ -49,5 +50,8 @@ function menu() {
 }
 
 function searchMenuToggle() {
-    document.getElementById("searchOverlay").classList.toggle("hidden");
+    document.getElementById("searchOverlay").classList.toggle("d-none");
+    setTimeout(() => {
+        document.getElementById("searchBarContainer").classList.toggle("translate_70");
+    }, 0.0001);
 }

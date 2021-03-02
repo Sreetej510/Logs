@@ -10667,3 +10667,8 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
