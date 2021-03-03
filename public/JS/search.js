@@ -18,22 +18,20 @@ function getDocs(myParam) {
 function retrieve(text, data) {
     var once = true;
     for (ele in data) {
-        for (count in data[ele]['keywords']) {
-            if (text.toLowerCase() == data[ele]['keywords'][count]) {
-                var name = (data[ele]['name']);
-                var description = (data[ele]['description']);
-                var lastEdit = (data[ele]['lastEdit']['seconds']);
-                lastEdit = changeDate(lastEdit);
+        var temp = data[ele].keywords;
+        if (temp.includes(text.toLowerCase())) {
+            var name = (data[ele]['name']);
+            var description = (data[ele]['description']);
+            var lastEdit = (data[ele]['lastEdit']['seconds']);
+            lastEdit = changeDate(lastEdit);
 
-                var group = (data[ele]['group']);
+            var group = (data[ele]['group']);
 
-                createResult(name, description, group, lastEdit);
+            createResult(name, description, group, lastEdit);
 
-                if (once) {
-                    once = false;
-                    document.getElementById('resultsContainer').removeAttribute('class');
-                }
-                break;
+            if (once) {
+                once = false;
+                document.getElementById('resultsContainer').removeAttribute('class');
             }
         }
     };
