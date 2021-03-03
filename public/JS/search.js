@@ -20,14 +20,15 @@ function retrieve(text, data) {
     for (ele in data) {
         var temp = data[ele].keywords;
         if (temp.includes(text.toLowerCase())) {
-            var name = (data[ele]['name']);
-            var description = (data[ele]['description']);
-            var lastEdit = (data[ele]['lastEdit']['seconds']);
+            var name = data[ele]['name'];
+            var id = data[ele]['id'];
+            var description = data[ele]['description'];
+            var lastEdit = data[ele]['lastEdit']['seconds'];
             lastEdit = changeDate(lastEdit);
 
-            var group = (data[ele]['group']);
+            var group = data[ele]['group'];
 
-            createResult(name, description, group, lastEdit);
+            createResult(name, id, description, group, lastEdit);
 
             if (once) {
                 once = false;
@@ -70,14 +71,18 @@ function changeDate(dateTimeParam) {
     return time;
 }
 
-function createResult(name, description, group, lastEdit) {
+function createResult(name, id, description, group, lastEdit) {
 
     var container = document.getElementById('resultsContainer');
 
     var newDiv = document.createElement('div');
     newDiv.classList.add('resultItemContainer')
 
-    var nameElement = '<a href=\'#\'>' + name + '</a>';
+    if (group) {
+        name = name + ' <small>of ' + group + '</small>';
+    }
+
+    var nameElement = '<a href=\'' + 'logs.html?logId=' + id + '\'>' + name + '</a>';
     var descriptionElement = '<div>' + description + '</div>';
     var lastEditElement = '<div>' + 'Last modified on ' + lastEdit + '</div>';
     var innerElement = nameElement + descriptionElement + lastEditElement;
