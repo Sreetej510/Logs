@@ -3,6 +3,7 @@ window.onload = function () {
     const myParam = urlParams.get('search');
     getDocs(myParam);
     document.getElementById('searchInput').value = myParam;
+    document.getElementById('noMatchText').innerHTML = "No results match for search : " + myParam;
 }
 
 function getDocs(myParam) {
@@ -15,11 +16,73 @@ function getDocs(myParam) {
 }
 
 function retrieve(text, data) {
+    var once = true;
     for (ele in data) {
         for (count in data[ele]['keywords']) {
             if (text.toLowerCase() == data[ele]['keywords'][count]) {
-                console.log(data[ele]['name'])
+                var name = (data[ele]['name']);
+                var description = (data[ele]['description']);
+                var lastEdit = (data[ele]['lastEdit']['seconds']);
+                lastEdit = changeDate(lastEdit);
+
+                var group = (data[ele]['group']);
+
+                createResult(name, description, group, lastEdit);
+
+                if (once) {
+                    once = false;
+                    document.getElementById('resultsContainer').removeAttribute('class');
+                }
+                break;
             }
         }
     };
+
+    if (once) {
+        document.getElementById('missingContainer').removeAttribute('class');
+    }
+}
+
+function changeDate(dateTimeParam) {
+
+    var monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    var dateTime = new Date(dateTimeParam * 1000);
+
+    var date = dateTime.getDate().toString();
+    if (date.length == 1) {
+        date = '0' + date;
+    }
+
+    var month = monthArray[dateTime.getMonth()];
+    var year = dateTime.getFullYear();
+    var hour = dateTime.getHours();
+    var minutes = dateTime.getMinutes();
+    var AmPm = ' am'
+
+    if (hour >= 12) {
+        if (hour > 12) {
+            hour = hour - 12;
+        }
+        AmPm = ' pm'
+    }
+
+    var time = month + ' ' + date + ',' + year + ' ' + hour + ':' + minutes + AmPm;
+
+    return time;
+}
+
+function createResult(name, description, group, lastEdit) {
+
+    var container = document.getElementById('resultsContainer');
+
+    var newDiv = document.createElement('div');
+    newDiv.classList.add('resultItemContainer')
+
+    var nameElement = '<a href=\'#\'>' + name + '</a>';
+    var descriptionElement = '<div>' + description + '</div>';
+    var lastEditElement = '<div>' + 'Last modified on ' + lastEdit + '</div>';
+    var innerElement = nameElement + descriptionElement + lastEditElement;
+    newDiv.innerHTML = '<div class=\'resultItem\'>' + innerElement + '</div>';
+    container.appendChild(newDiv);
 }

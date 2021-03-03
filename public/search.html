@@ -47,12 +47,14 @@
     <div class="w-100 h-100 searchResultsContainer">
       <div class="searchResults">
         <div class="resultsTitle">Results from this site</div>
-        <div class="missingContainer">
-          <div>No results match your search</div>
-          <img src="Images/missing.png" width="200px" height="200px" />
-          <div>Check the spelling, or try a different search</div>
+        <div class="containerOverlay">
+          <div id="missingContainer" class="d-none">
+            <div id="noMatchText">No results match for search :</div>
+            <img src="Images/missing.png" width="200px" height="200px" />
+            <div>Check the spelling, or try a different search</div>
+          </div>
+          <div class="d-none" id="resultsContainer"></div>
         </div>
-        <div class="resultsContainer d-none"></div>
       </div>
     </div>
 
