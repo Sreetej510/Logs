@@ -1,45 +1,53 @@
+var isResultAvailable = false;
+const urlParams = new URLSearchParams(window.location.search);
+const searchWord = urlParams.get('search');
+
 window.onload = function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('search');
-    getDocs(myParam);
-    document.getElementById('searchInput').value = myParam;
-    document.getElementById('noMatchText').innerHTML = "No results match for search : " + myParam;
+    getDocs();
+    document.getElementById('searchInput').value = searchWord;
+    document.getElementById('noMatchText').innerHTML = "No results match for search : " + searchWord;
 }
 
-function getDocs(myParam) {
+
+function getDocs() {
     var main = db.collection("Main").doc("allLogs");
     main.get().then((doc) => {
         if (doc.exists) {
-            retrieve(myParam, doc.data())
+            retrieve(doc.data())
         }
     });
 }
 
-function retrieve(text, data) {
-    var once = true;
-    for (ele in data) {
-        var temp = data[ele].keywords;
-        if (temp.includes(text.toLowerCase())) {
-            var name = data[ele]['name'];
-            var id = data[ele]['id'];
-            var description = data[ele]['description'];
-            var lastEdit = data[ele]['lastEdit']['seconds'];
-            lastEdit = changeDate(lastEdit);
 
-            var group = data[ele]['group'];
+async function retrieve(groupNames) {
 
-            createResult(name, id, description, group, lastEdit);
+    var groupsArray = groupNames["collectionNames"]
+    for (groupIndex in groupsArray) {
+        var groupName = groupsArray[groupIndex]
+        await db.collection("Main").doc("allLogs").collection(groupName)
+            .get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    check(groupName, doc.data());
+                });
+            });
+    }
 
-            if (once) {
-                once = false;
-                document.getElementById('resultsContainer').removeAttribute('class');
-            }
-        }
-    };
-
-    if (once) {
+    if (!isResultAvailable) {
         document.getElementById('missingContainer').removeAttribute('class');
     }
+}
+
+function check(groupName, data) {
+    var temp = data['keywords'];
+    if (temp.includes(searchWord.toLowerCase())) {
+        var name = data['name'];
+        var id = data['id'];
+        var description = data['description'];
+        var lastEdit = data['lastEdit']['seconds'];
+        lastEdit = changeDate(lastEdit);
+
+        createResult(name, id, description, groupName, lastEdit);
+    };
 }
 
 function changeDate(dateTimeParam) {
@@ -78,7 +86,7 @@ function createResult(name, id, description, group, lastEdit) {
     var newDiv = document.createElement('div');
     newDiv.classList.add('resultItemContainer')
 
-    if (group) {
+    if (group != "noGroup") {
         name = name + ' <small>of ' + group + '</small>';
     }
 
@@ -87,5 +95,10 @@ function createResult(name, id, description, group, lastEdit) {
     var lastEditElement = '<div>' + 'Last modified on ' + lastEdit + '</div>';
     var innerElement = nameElement + descriptionElement + lastEditElement;
     newDiv.innerHTML = '<div class=\'resultItem\'>' + innerElement + '</div>';
-    container.appendChild(newDiv);
+
+    container.append(newDiv);
+
+    document.getElementById('resultsContainer').removeAttribute('class');
+
+    isResultAvailable = true;
 }

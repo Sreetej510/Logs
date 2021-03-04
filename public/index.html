@@ -65,12 +65,13 @@
 
           <!-- Navigation Buttons -->
           <nav class="navbar navbar-light p-0 align-items-start">
-            <ul class="navbar-nav flex-column px-4 w-100">
+            <ul class="navbar-nav flex-column px-4 w-100" id="nav">
               <li class="nav-item">
                 <a class="nav-link" href="index.html">Home</a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link collapsed" data-toggle="collapse" data-target="logNav" href="#">Group Name</a>
+                <a class="nav-link collapsed" data-target="logNav" href="#">Group Name</a>
               </li>
               <div class="container bg-light rounded">
                 <div class="navbar-collapse collapse ml-auto" id="logNav">
@@ -90,8 +91,9 @@
                   </ul>
                 </div>
               </div>
+
               <li class="nav-item">
-                <a class="nav-link collapsed" data-toggle="collapse" data-target="logNav2" href="#">Group Name 2</a>
+                <a class="nav-link collapsed" data-target="logNav2" href="#">Group Name 2</a>
               </li>
               <div class="container bg-light rounded">
                 <div class="navbar-collapse collapse ml-auto" id="logNav2">
@@ -111,8 +113,9 @@
                   </ul>
                 </div>
               </div>
+
               <li class="nav-item">
-                <a class="nav-link collapsed" data-toggle="collapse" data-target="logNav3" href="#">Group Name 2</a>
+                <a class="nav-link collapsed" data-target="logNav3" href="#">Group Name 2</a>
               </li>
               <div class="container bg-light rounded">
                 <div class="navbar-collapse collapse ml-auto" id="logNav3">
@@ -230,10 +233,28 @@
       </div>
     </div>
     <script src="JS/app.js"></script>
-    <script src="JS/mainScript.js"></script>
     <script src="JS/searchBar.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCS4XqcN3PxEtKGZleCO1ZIefr_3-iWn64",
+        authDomain: "logs-353b7.firebaseapp.com",
+        projectId: "logs-353b7",
+        storageBucket: "logs-353b7.appspot.com",
+        messagingSenderId: "159152054746",
+        appId: "1:159152054746:web:be7088b12a5c2d1502a0e3",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      const db = firebase.firestore();
+    </script>
+
+    <script src="JS/getLogs.js"></script>
+    <script src="JS/mainScript.js"></script>
   </body>
 </html>

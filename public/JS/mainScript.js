@@ -1,4 +1,5 @@
-window.onload = function () {
+
+function addCollaseListner() {
     document.getElementById('searchInput').value = '';
     elements = document.getElementsByClassName('collapsed');
     for (var i = 0; i < elements.length; i++) {
