@@ -1,7 +1,8 @@
 window.onload = function () {
     getDocs();
-    addCollaseListner();
 }
+
+var cards = [];
 
 function getDocs() {
     var main = db.collection("Main").doc("allLogs");
@@ -21,11 +22,22 @@ async function retrieve(groupNames) {
                 populate(groupName, querySnapshot);
             });
     }
+
+    cards.sort(function (a, b) {
+        return b.lastEdit - a.lastEdit;
+    });
+
+    createCard();
 }
 
 function populate(groupName, data) {
     var group = groupName;
 
+    data.forEach((doc) => {
+        var obj = doc.data();
+        obj.group = group;
+        cards.push(obj);
+    });
 
     if (groupName == 'noGroup') {
         createNavIndividual(data);
@@ -33,18 +45,6 @@ function populate(groupName, data) {
         createNavGroup(data, group);
     }
 
-    data.forEach((doc) => {
-        var docData = doc.data();
-        var name = docData['name'];
-        var id = docData['id'];
-        var link = "logs.html?logId=" + id;
-        var description = docData['description'];
-        var lastEdit = docData['lastEdit']['seconds'];
-        lastEdit = changeDate(lastEdit);
-        var image = docData['image'];
-
-        // createCard(name, link, description, group, lastEdit, image);
-    });
 };
 
 function createNavIndividual(data) {
@@ -62,7 +62,6 @@ function createNavIndividual(data) {
         nav.appendChild(liElement);
     });
 }
-
 
 function createNavGroup(data, group) {
 
@@ -95,6 +94,43 @@ function createNavGroup(data, group) {
     });
 
     addCollaseListner();
+}
+
+function createCard() {
+
+    var cardContainer = document.getElementById('cardContainer');
+
+    cards.forEach((obj) => {
+        var group = obj['group'];
+        var name = obj['name'];
+        var id = obj['id'];
+        var link = "logs.html?logId=" + id;
+        var description = obj['description'];
+        var lastEdit = obj['lastEdit']['seconds'];
+        lastEdit = changeDate(lastEdit);
+        var image = obj['image'];
+
+        var cardElement = document.createElement('div');
+        cardElement.classList.add('card');
+
+        var aElement = document.createElement('a');
+        aElement.href = link;
+        aElement.setAttribute('class', 'h-100 w-100 position-absolute');
+        cardElement.appendChild(aElement);
+
+        var imgElement = document.createElement('img');
+        imgElement.src = 'Images/book.jpg';
+        imgElement.classList.add('card-img-top');
+        cardElement.appendChild(imgElement);
+
+        var descriptionElement = document.createElement('div');
+        descriptionElement.setAttribute('class', 'card-body');
+        descriptionElement.innerHTML = '<p class="card-text">' + description + '</p>';
+        cardElement.appendChild(descriptionElement);
+
+        cardContainer.appendChild(cardElement);
+
+    });
 }
 
 // change Date

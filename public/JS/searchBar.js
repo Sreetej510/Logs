@@ -35,8 +35,8 @@ function goBack() {
 
 window.addEventListener('scroll', function () {
     if (document.body.scrollTop === 0) {
-        document.getElementById('searchBarContainer').classList.remove('searchBarShadow');
+        document.getElementById('searchBarContainer').classList.remove('boxShadow');
     } else {
-        document.getElementById('searchBarContainer').classList.add('searchBarShadow');
+        document.getElementById('searchBarContainer').classList.add('boxShadow');
     }
 });

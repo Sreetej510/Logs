@@ -56,3 +56,14 @@ function searchMenuToggle() {
         document.getElementById("searchBarContainer").classList.toggle("translate_70");
     }, 0.0001);
 }
+
+document.getElementById('MainPage').addEventListener('scroll', function () {
+    var header = document.getElementById('header');
+    var mainPage = document.getElementById('MainPage');
+    if (mainPage.scrollTop == 0) {
+        header.classList.remove('boxShadow');
+    } else {
+        header.classList.add('boxShadow');
+    }
+
+})

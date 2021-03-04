@@ -97,6 +97,14 @@
   transform: translateX(0px);
 }
 
+.navbar-collapse li {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.navbar-collapse > ul :last-child {
+  border: none !important;
+}
+
 #customNav nav {
   height: 70%;
   padding-bottom: 20px !important;
