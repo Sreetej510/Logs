@@ -50,34 +50,6 @@ function check(groupName, data) {
     };
 }
 
-function changeDate(dateTimeParam) {
-
-    var monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    var dateTime = new Date(dateTimeParam * 1000);
-
-    var date = dateTime.getDate().toString();
-    if (date.length == 1) {
-        date = '0' + date;
-    }
-
-    var month = monthArray[dateTime.getMonth()];
-    var year = dateTime.getFullYear();
-    var hour = dateTime.getHours();
-    var minutes = dateTime.getMinutes();
-    var AmPm = ' am'
-
-    if (hour >= 12) {
-        if (hour > 12) {
-            hour = hour - 12;
-        }
-        AmPm = ' pm'
-    }
-
-    var time = month + ' ' + date + ',' + year + ' ' + hour + ':' + minutes + AmPm;
-
-    return time;
-}
 
 function createResult(name, id, description, group, lastEdit) {
 
@@ -92,7 +64,7 @@ function createResult(name, id, description, group, lastEdit) {
 
     var nameElement = '<a href=\'' + 'logs.html?logId=' + id + '\'>' + name + '</a>';
     var descriptionElement = '<div>' + description + '</div>';
-    var lastEditElement = '<div>' + 'Last modified on ' + lastEdit + '</div>';
+    var lastEditElement = '<div class="small">' + 'Last modified ' + lastEdit + '</div>';
     var innerElement = nameElement + descriptionElement + lastEditElement;
     newDiv.innerHTML = '<div class=\'resultItem\'>' + innerElement + '</div>';
 
@@ -101,4 +73,51 @@ function createResult(name, id, description, group, lastEdit) {
     document.getElementById('resultsContainer').removeAttribute('class');
 
     isResultAvailable = true;
+}
+
+// Change date
+function changeDate(dateTimeParam) {
+
+    var monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    var dateTime = new Date(dateTimeParam * 1000);
+    const timeNow = Date.now();
+
+    var date = dateTime.getDate().toString();
+    if (date.length == 1) {
+        date = '0' + date;
+    }
+
+    const timeDiff = timeNow - dateTimeParam * 1000
+
+
+
+    var month = monthArray[dateTime.getMonth()];
+    var year = dateTime.getFullYear();
+
+    var time = 'on ' + month + ' ' + date + ', ' + year;
+
+    if (timeDiff > 86400000 && timeDiff < 172800000) {
+        time = 'yesterday'
+    }
+
+    if (timeDiff < 86400000 && timeDiff > 3600000) {
+        time = Math.floor(timeDiff / 3600000);
+        if (time == 1) {
+            time = ' an hour ago';
+        } else {
+            time = time + ' hours ago';
+        }
+    }
+
+    if (timeDiff < 3600000) {
+        time = Math.floor(timeDiff / 600000);
+        if (time == 1) {
+            time = ' a min ago';
+        } else {
+            time = time + ' mins ago';
+        }
+    }
+
+    return time;
 }

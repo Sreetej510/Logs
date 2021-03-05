@@ -35,11 +35,13 @@ body {
   text-align: start;
   font-size: 14px;
   margin-top: 8px;
-  color: #212121;
+  color: #111;
 }
 
 .resultItem :last-child {
-  color: #757575 !important;
+  color: #aaa !important;
+  font-size: 0.75rem;
+  padding: 0;
 }
 
 .searchResults {

@@ -26,14 +26,14 @@
   font-family: "Roboto", sans-serif;
 }
 
+.font_Comic {
+  font-family: "Comic Neue", "Comic Sans MS", "Comic Sans";
+}
+
 .logoImg {
   max-width: 25px;
   min-width: 20px;
   align-self: center;
-}
-
-.font_Comic {
-  font-family: "Comic Sans MS", "Comic Sans";
 }
 
 .mainBG {
@@ -128,6 +128,12 @@
   overflow: hidden;
 }
 
+.titleHome span {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
 .hamburger {
   display: none;
 }
@@ -187,6 +193,39 @@
   box-shadow: 1px 1px 3px #000000;
 }
 
+.card {
+  border-top: 0.2rem solid;
+  font-weight: 400;
+}
+
+small {
+  color: #757575;
+  font-family: sans-serif;
+}
+
+.card-text.pl-4 {
+  color: #111;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-transform: capitalize;
+}
+
+.card-header p {
+  align-self: baseline;
+  margin-right: 5%;
+  margin-bottom: 0.5rem;
+}
+
+.card > a {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
 @media (max-width: 1200px) {
   #customNav {
     transform: translateX(-250px);
@@ -227,6 +266,12 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .titleHome span {
+    font-size: 2.5rem;
+  }
+}
+
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   .mainBG {
     height: 280px;
@@ -236,4 +281,63 @@
   .mainBG {
     height: 250px;
   }
+}
+
+/* custom themes for cards */
+
+.cusTheme-orange {
+  border-top-color: orange;
+  color: orange;
+}
+.cusTheme-indigo {
+  border-top-color: indigo;
+  color: indigo;
+}
+.cusTheme-skyblue {
+  border-top-color: skyblue;
+  color: skyblue;
+}
+.cusTheme-deepskyblue {
+  border-top-color: deepskyblue;
+  color: deepskyblue;
+}
+.cusTheme-royalblue {
+  border-top-color: royalblue;
+  color: royalblue;
+}
+.cusTheme-darkcyan {
+  border-top-color: darkcyan;
+  color: darkcyan;
+}
+.cusTheme-deeppink {
+  border-top-color: deeppink;
+  color: deeppink;
+}
+.cusTheme-darkorchid {
+  border-top-color: darkorchid;
+  color: darkorchid;
+}
+.cusTheme-forestgreen {
+  border-top-color: forestgreen;
+  color: forestgreen;
+}
+.cusTheme-mediumseagreen {
+  border-top-color: mediumseagreen;
+  color: mediumseagreen;
+}
+.cusTheme-slateblue {
+  border-top-color: slateblue;
+  color: slateblue;
+}
+.cusTheme-teal {
+  border-top-color: teal;
+  color: teal;
+}
+.cusTheme-goldenrod {
+  border-top-color: goldenrod;
+  color: goldenrod;
+}
+.cusTheme-darkturquoise {
+  border-top-color: darkturquoise;
+  color: darkturquoise;
 }
