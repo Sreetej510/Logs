@@ -144,12 +144,13 @@
 
 #accessTokenForm {
   margin-left: 5px;
-  transform: translateY(50px);
-  transition: translate 1s ease;
+  margin-right: 35%;
+  transform: translateX(-250px);
+  transition: all 0.3s ease;
 }
 
 #accessTokenForm.tokenDisplay {
-  transform: translateY(0px) !important;
+  transform: translateX(0px) !important;
 }
 
 #header {

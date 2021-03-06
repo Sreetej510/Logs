@@ -82,6 +82,6 @@ document.getElementById("accessTokenForm").addEventListener('submit', function (
 
     localStorage.setItem("key1", keys[0]);
     localStorage.setItem("key2", keys[1]);
-    formInput.value = "dx92m09-r38dg356";
+    formInput.value = "dx92m09r38dg3567088b12a5c2d1502";
     displayAcessToken();
 });
