@@ -7,10 +7,10 @@
   <body>
     <div id="div">Hello</div>
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
 
     <script>
-      // Your web app's Firebase configuration
       var firebaseConfig = {
         apiKey: "AIzaSyCS4XqcN3PxEtKGZleCO1ZIefr_3-iWn64",
         authDomain: "logs-353b7.firebaseapp.com",
@@ -20,10 +20,14 @@
         appId: "1:159152054746:web:be7088b12a5c2d1502a0e3",
       };
 
-      var db = firebase.firestore();
-
-      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+    </script>
+
+    <script>
+      var email = localStorage.getItem("key1");
+      var pwd = localStorage.getItem("key2");
+      firebase.auth().signInWithEmailAndPassword(email, pwd);
     </script>
 
     <script src="JS/logsAssign.js"></script>
