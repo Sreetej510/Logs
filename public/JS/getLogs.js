@@ -5,17 +5,20 @@ window.onload = function () {
 var cards = [];
 
 function getDocs() {
-    db.collection("Main").doc("allLogs").get().then((doc) => {
-        if (doc.exists) {
-            retrieve(doc.data());
-        }
-    });
+
+    const getSubCollections = firebase.app().functions('asia-south1').httpsCallable('getSubCollections');
+
+    getSubCollections({ docPath: 'Main/allLogs' })
+        .then(function (result) {
+            var collections = result.data.collections;
+            retrieve(collections);
+        })
 }
 
-async function retrieve(groupNames) {
-    var groupsArray = groupNames["collectionNames"]
-    for (groupIndex in groupsArray) {
-        var groupName = groupsArray[groupIndex];
+async function retrieve(collections) {
+
+    for (var groupIndex in collections) {
+        var groupName = collections[groupIndex];
         await db.collection("Main").doc("allLogs").collection(groupName)
             .get().then((querySnapshot) => {
                 populate(groupName, querySnapshot);
