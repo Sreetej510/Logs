@@ -5,8 +5,7 @@ window.onload = function () {
 var cards = [];
 
 function getDocs() {
-    var main = db.collection("Main").doc("allLogs");
-    main.get().then((doc) => {
+    db.collection("Main").doc("allLogs").get().then((doc) => {
         if (doc.exists) {
             retrieve(doc.data());
         }
