@@ -3,6 +3,13 @@ window.onload = function () {
         .then(() => {
             getDocs();
         });
+
+    setTimeout(() => {
+        firebase.firestore().enableNetwork()
+            .then(() => {
+                syncCache();
+            });
+    }, 5000);
 }
 
 var cards = [];
@@ -122,10 +129,7 @@ function createCard() {
 
     });
 
-    firebase.firestore().enableNetwork()
-        .then(() => {
-            syncCache();
-        });
+
 }
 
 function createHTML(group, name, link, description, latestLog, lastEdit, color) {

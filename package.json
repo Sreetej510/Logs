@@ -4,12 +4,15 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server -c-1",
-    "deploy":"firebase deploy --only hosting"
+    "deploy": "firebase deploy --only hosting"
   },
   "keywords": [
     "logs"
   ],
   "devDependencies": {
     "http-server": "^0.12.3"
+  },
+  "dependencies": {
+    "package.json": "^2.0.1"
   }
 }
