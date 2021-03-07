@@ -1,33 +1,33 @@
 window.onload = function () {
-    getDocs();
+    firebase.firestore().disableNetwork()
+        .then(() => {
+            getDocs();
+        });
 }
 
 var cards = [];
 
 function getDocs() {
 
-    const getSubCollections = firebase.app().functions('asia-south1').httpsCallable('getSubCollections');
-
-    getSubCollections({ docPath: 'Main/allLogs' })
-        .then(function (result) {
-            var collections = result.data.collections;
-            retrieve(collections);
-        })
+    db.collection("Main").doc("allLogs").get().then((doc) => {
+        if (doc.exists) {
+            retrieve(doc.data());
+        }
+        var source = doc.metadata.fromCache ? "local cache" : "server";
+        console.log("Data came from " + source);
+    });
 }
 
-async function retrieve(collections) {
+async function retrieve(groupNames) {
 
-    for (var groupIndex in collections) {
-        var groupName = collections[groupIndex];
+    var groupsArray = groupNames["collectionNames"]
+    for (groupIndex in groupsArray) {
+        var groupName = groupsArray[groupIndex];
         await db.collection("Main").doc("allLogs").collection(groupName)
             .get().then((querySnapshot) => {
                 populate(groupName, querySnapshot);
             });
     }
-
-    cards.sort(function (a, b) {
-        return b.lastEdit - a.lastEdit;
-    });
 
     createCard();
 }
@@ -100,6 +100,10 @@ function createNavGroup(data, group) {
 
 function createCard() {
 
+    cards.sort(function (a, b) {
+        return b.lastEdit - a.lastEdit;
+    });
+
     var cardContainer = document.getElementById('cardContainer');
 
     cards.forEach((obj) => {
@@ -117,6 +121,11 @@ function createCard() {
         cardContainer.appendChild(htmlElement);
 
     });
+
+    firebase.firestore().enableNetwork()
+        .then(() => {
+            syncCache();
+        });
 }
 
 function createHTML(group, name, link, description, latestLog, lastEdit, color) {
@@ -192,3 +201,15 @@ function changeDate(dateTimeParam) {
     return time;
 }
 
+function syncCache() {
+    db.collection("Main").doc("allLogs").get().then((doc) => {
+        if (doc.exists) {
+            var groupNames = doc.data();
+            var groupsArray = groupNames["collectionNames"];
+            for (groupIndex in groupsArray) {
+                var groupName = groupsArray[groupIndex];
+                db.collection("Main").doc("allLogs").collection(groupName).get()
+            }
+        }
+    });
+}
