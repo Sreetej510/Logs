@@ -52,7 +52,7 @@
     </div>
 
     <div class="container-fluid">
-      <div class="row row-height">
+      <div class="row row-height" id="mainContainer">
         <div id="navOverlay" class="d-none" onclick="menu()"></div>
 
         <!-- Navigation -->
@@ -120,7 +120,58 @@
           </div>
 
           <div class="mt-5 card-columns" id="cardContainer" style="display: inline-block"> </div>
+
+          <button class="addButton" onclick="addModalToggle()">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path></svg>
+          </button>
         </div>
+      </div>
+
+      <!-- Add Modal -->
+
+      <div id="addModalContainer">
+        <div class="modalMain px-md-5" id="modalMain">
+          <div class="container px-md-5 py-4 font_Comic">
+            <div class="h4 text-center border-bottom mt-3">New Log</div>
+            <form class="container p-4" id="CreateLogForm">
+              <input class="col mb-3 form-control" name="logName" placeholder="Log Name" maxlength="15" required />
+
+              <textarea name="description form-control " class="col mb-2" rows="3" placeholder="Description" maxlength="180" required></textarea>
+
+              <input class="col mb-2 form-control" placeholder="Group Name" maxlength="15" />
+
+              <div class="form-group mb-2 d-flex">
+                <label class="mr-3 col-form-label">Color : </label>
+                <select id="newLogColor" class="col">
+                  <option value="">None</option>
+                  <option value="darkcyan" class="cusTheme-darkcyan">Dark Cyan</option>
+                  <option value="darkorchid" class="cusTheme-darkorchid">Dark Orchid</option>
+                  <option value="ddarkturquoise" class="cusTheme-darkturquoise">Dark Turquoise</option>
+                  <option value="deeppink" class="cusTheme-deeppink">Deep Pink</option>
+                  <option value="deepskyblue" class="cusTheme-deepskyblue">Deep Skyblue</option>
+                  <option value="forestgreen" class="cusTheme-forestgreen">Forest Green</option>
+                  <option value="goldenrod" class="cusTheme-goldenrod">Golden</option>
+                  <option value="indigo" class="cusTheme-indigo">Indigo</option>
+                  <option value="mediumseagreen" class="cusTheme-mediumseagreen">Sea Green</option>
+                  <option value="orange" class="cusTheme-orange">Orange</option>
+                  <option value="royalblue" class="cusTheme-royalblue">Royal Blue</option>
+                  <option value="slateblue" class="cusTheme-slateblue">Slate Blue</option>
+                  <option value="skyblue" class="cusTheme-skyblue">Skyblue</option>
+                  <option value="teal" class="cusTheme-teal">Teal</option>
+                </select>
+              </div>
+
+              <input class="col mb-2 form-control" name="keywords" placeholder="Keywords" required />
+
+              <div class="row justify-content-center px-md-5 pt-3">
+                <button type="submit" class="btn btn-primary col col-md-2 mx-md-5 mx-2">Create</button>
+                <button type="button" onclick="addModalToggle()" class="btn btn-danger col col-md-2 mx-md-5 mx-2">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div onclick="addModalToggle()"></div>
       </div>
     </div>
     <script src="JS/app.js"></script>

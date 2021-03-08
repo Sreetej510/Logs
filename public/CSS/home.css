@@ -258,6 +258,75 @@ small {
   position: absolute;
 }
 
+.addButton {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 65px;
+  height: 65px;
+  border-radius: 33px;
+  background-color: #ffffff;
+  outline: none;
+  border: none;
+  padding: 13px;
+  box-shadow: 0 6px 10px 0 rgb(0 0 0 / 14%), 0 5px 18px 0 rgb(0 0 0 / 12%), 0 3px 15px -1px rgb(0 0 0 / 20%);
+}
+
+.addButton:hover {
+  background-color: #e5e5e5;
+}
+
+#addModalContainer {
+  display: none;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #2525258e;
+  z-index: 10000;
+  align-content: center;
+}
+.modaltoggle {
+  display: block !important;
+}
+
+#addModalContainer > :last-child {
+  left: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.modalMain {
+  background-color: white;
+  transition: all 0.3s ease-out;
+  transform: translateY(-100%);
+  box-shadow: 0 6px 10px 0 rgb(0 0 0 / 14%), 0 5px 18px 0 rgb(0 0 0 / 12%), 0 3px 15px -1px rgb(0 0 0 / 20%);
+}
+
+.modalMain.transform {
+  transform: translateY(0) !important;
+}
+
+option > div {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background-color: #000;
+}
+
+.blur {
+  filter: blur(5px);
+  overflow: hidden !important;
+}
+
+@media (hover: none) {
+  .addButton:hover {
+    background-color: #ffffff;
+  }
+}
+
 @media (max-width: 1200px) {
   #customNav,
   .navFooter {
@@ -304,6 +373,14 @@ small {
   .titleHome span {
     font-size: 2.5rem;
   }
+  .addButton {
+    right: 25px;
+    bottom: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    padding: 9px;
+  }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -319,59 +396,59 @@ small {
 
 /* custom themes for cards */
 
-.cusTheme-orange {
-  border-top-color: orange;
-  color: orange;
-}
-.cusTheme-indigo {
-  border-top-color: indigo;
-  color: indigo;
-}
-.cusTheme-skyblue {
-  border-top-color: skyblue;
-  color: skyblue;
-}
-.cusTheme-deepskyblue {
-  border-top-color: deepskyblue;
-  color: deepskyblue;
-}
-.cusTheme-royalblue {
-  border-top-color: royalblue;
-  color: royalblue;
-}
 .cusTheme-darkcyan {
   border-top-color: darkcyan;
   color: darkcyan;
-}
-.cusTheme-deeppink {
-  border-top-color: deeppink;
-  color: deeppink;
 }
 .cusTheme-darkorchid {
   border-top-color: darkorchid;
   color: darkorchid;
 }
+.cusTheme-darkturquoise {
+  border-top-color: darkturquoise;
+  color: darkturquoise;
+}
+.cusTheme-deeppink {
+  border-top-color: deeppink;
+  color: deeppink;
+}
+.cusTheme-deepskyblue {
+  border-top-color: deepskyblue;
+  color: deepskyblue;
+}
 .cusTheme-forestgreen {
   border-top-color: forestgreen;
   color: forestgreen;
-}
-.cusTheme-mediumseagreen {
-  border-top-color: mediumseagreen;
-  color: mediumseagreen;
-}
-.cusTheme-slateblue {
-  border-top-color: slateblue;
-  color: slateblue;
-}
-.cusTheme-teal {
-  border-top-color: teal;
-  color: teal;
 }
 .cusTheme-goldenrod {
   border-top-color: goldenrod;
   color: goldenrod;
 }
-.cusTheme-darkturquoise {
-  border-top-color: darkturquoise;
-  color: darkturquoise;
+.cusTheme-indigo {
+  border-top-color: indigo;
+  color: indigo;
+}
+.cusTheme-mediumseagreen {
+  border-top-color: mediumseagreen;
+  color: mediumseagreen;
+}
+.cusTheme-orange {
+  border-top-color: orange;
+  color: orange;
+}
+.cusTheme-royalblue {
+  border-top-color: royalblue;
+  color: royalblue;
+}
+.cusTheme-slateblue {
+  border-top-color: slateblue;
+  color: slateblue;
+}
+.cusTheme-skyblue {
+  border-top-color: skyblue;
+  color: skyblue;
+}
+.cusTheme-teal {
+  border-top-color: teal;
+  color: teal;
 }

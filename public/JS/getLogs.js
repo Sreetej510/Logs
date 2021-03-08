@@ -1,41 +1,30 @@
-window.onload = function () {
-    firebase.firestore().disableNetwork()
-        .then(() => {
-            getDocs();
-        });
-
-    setTimeout(() => {
-        firebase.firestore().enableNetwork()
-            .then(() => {
-                syncCache();
-            });
-    }, 5000);
+window.onload = async function () {
+    getDocs();
+    syncCache();
 }
 
 var cards = [];
 
-function getDocs() {
-
-    db.collection("Main").doc("allLogs").get().then((doc) => {
+function getDocs(src = "cache") {
+    db.collection("Main").doc("allLogs").get({ source: src }).then((doc) => {
         if (doc.exists) {
-            retrieve(doc.data());
+            retrieve(doc.data(), src);
         }
-        var source = doc.metadata.fromCache ? "local cache" : "server";
-        console.log("Data came from " + source);
+    }).catch((error) => {
+        getDocs("server");
     });
 }
 
-async function retrieve(groupNames) {
+async function retrieve(groupNames, src) {
 
     var groupsArray = groupNames["collectionNames"]
     for (groupIndex in groupsArray) {
         var groupName = groupsArray[groupIndex];
         await db.collection("Main").doc("allLogs").collection(groupName)
-            .get().then((querySnapshot) => {
+            .get({ source: src }).then((querySnapshot) => {
                 populate(groupName, querySnapshot);
             });
     }
-
     createCard();
 }
 
@@ -206,14 +195,11 @@ function changeDate(dateTimeParam) {
 }
 
 function syncCache() {
-    db.collection("Main").doc("allLogs").get().then((doc) => {
+    db.collection("Main").doc("allLogs").get({ source: "server" }).then((doc) => {
         if (doc.exists) {
-            var groupNames = doc.data();
-            var groupsArray = groupNames["collectionNames"];
-            for (groupIndex in groupsArray) {
-                var groupName = groupsArray[groupIndex];
-                db.collection("Main").doc("allLogs").collection(groupName).get()
-            }
+            doc.data().collectionNames.forEach(groupName => {
+                db.collection("Main").doc("allLogs").collection(groupName).get({ source: "server" });
+            });
         }
     });
 }
