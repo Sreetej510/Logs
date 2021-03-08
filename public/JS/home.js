@@ -20,6 +20,9 @@ document.getElementById('CreateLogForm').addEventListener('submit', function (e)
     var color = form.elements[3].value;
     var keywordsString = form.elements[4].value;
     var keywords = keywordsString.split(',');
+
+    keywords = keywords.map(name => name.toLowerCase());
+
     console.log(logName, description, groupName, color, keywords);
     var id = new Date(Date.now()).getTime()
 

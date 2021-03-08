@@ -16,13 +16,13 @@ small {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  text-transform: capitalize;
 }
 
-.card-header p {
+.card-header > p {
   align-self: baseline;
   margin-right: 5%;
   margin-bottom: 0.5rem;
+  text-transform: capitalize;
 }
 
 .card > a {
