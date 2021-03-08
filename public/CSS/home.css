@@ -1,230 +1,3 @@
-* {
-  -ms-overflow-style: none !important;
-}
-
-.row-height {
-  height: 100vh;
-}
-
-.container {
-  background-color: white;
-}
-
-.border-3 {
-  border-width: 3px !important;
-}
-
-.row [class*="col-"] {
-  transition: all 1s ease-in-out;
-}
-
-.navTitle {
-  height: 30%;
-}
-
-.font_Roboto {
-  font-family: "Roboto", sans-serif;
-}
-
-.font_Comic {
-  font-family: "Comic Neue", "Comic Sans MS", "Comic Sans";
-}
-
-.logoImg {
-  max-width: 25px;
-  min-width: 20px;
-  align-self: center;
-}
-
-.mainBG {
-  overflow: hidden;
-  height: 310px;
-}
-
-.mainBG div {
-  background-size: cover;
-  background-position: center center;
-  background-image: url("../Images/book.jpg");
-  transform: translate3d(0px, 0px, 0px);
-}
-
-.mainBG div::before {
-  background-color: white;
-  opacity: 0.4;
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 100%;
-  display: block;
-  content: "";
-}
-
-.titleHome {
-  align-self: center !important;
-}
-
-.titleHome span {
-  margin: 1rem;
-}
-
-.titleHome::after {
-  border-bottom-style: solid;
-  border-bottom-width: 5px;
-  border-color: rgba(141, 87, 220);
-  margin-left: auto;
-  margin-right: auto;
-  width: 100px;
-  display: block;
-  content: "";
-}
-
-.right {
-  height: 100%;
-  overflow-y: scroll;
-}
-
-#customNav {
-  width: 250px;
-  transition: all 0.5s ease-in-out;
-  z-index: 5;
-  height: 100%;
-}
-
-#customNav.hamClick,
-#customNav.hamClick .navFooter {
-  position: absolute;
-  width: 250px;
-  transform: translateX(0px);
-}
-
-.navbar-collapse li {
-  border-bottom: 1px solid #dee2e6;
-}
-
-.navbar-collapse > ul :last-child {
-  border: none !important;
-}
-
-#customNav nav {
-  height: 70%;
-  padding-bottom: 20px !important;
-  overflow-y: scroll;
-}
-
-#navOverlay {
-  position: absolute;
-  width: 100vw;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  height: 100vh;
-  opacity: 0.4;
-  background-color: #444;
-}
-
-.navFooter {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 249px;
-  height: 35px;
-  background-color: white;
-  transition: all 0.5s ease-in-out;
-  overflow: hidden;
-}
-
-.navFooter > button {
-  position: absolute;
-  right: 20px;
-  top: 2px;
-  background: transparent;
-  outline: none;
-  border: none;
-}
-
-#accessTokenForm {
-  margin-left: 5px;
-  margin-right: 35%;
-  transform: translateX(-250px);
-  transition: all 0.3s ease;
-}
-
-#accessTokenForm.tokenDisplay {
-  transform: translateX(0px) !important;
-}
-
-#header {
-  padding-left: 60px;
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-}
-
-.titleHome span {
-  font-size: 3.5rem;
-  font-weight: 300;
-  line-height: 1.2;
-}
-
-.hamburger {
-  display: none;
-}
-
-.ham {
-  cursor: pointer;
-  transition: transform 400ms;
-  user-select: none;
-}
-.hamRotate.active {
-  transform: rotate(45deg);
-}
-
-.line {
-  fill: none;
-  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-  stroke: #000;
-  stroke-width: 5;
-  stroke-linecap: round;
-}
-.ham .top {
-  stroke-dasharray: 40 121;
-}
-.ham .bottom {
-  stroke-dasharray: 40 121;
-}
-.ham.active .top {
-  stroke-dashoffset: -90px;
-}
-.ham.active .bottom {
-  stroke-dashoffset: -90px;
-}
-
-.opacity-0h5 {
-  opacity: 0 !important;
-  transition: opacity 0.25s ease-in-out !important;
-}
-
-.searchIcon {
-  position: fixed;
-  z-index: 120;
-  right: 10px;
-  background-color: transparent;
-  border: none;
-  top: 15px;
-}
-
-.searchIconBG {
-  position: absolute;
-  background-color: white;
-  width: 80px;
-  height: 40px;
-  top: -5px;
-  left: -5px;
-  z-index: -10;
-  border-radius: 50px;
-  box-shadow: 1px 1px 3px #000000;
-}
-
 .card {
   border-top: 0.2rem solid;
   font-weight: 400;
@@ -287,6 +60,7 @@ small {
   z-index: 10000;
   align-content: center;
 }
+
 .modaltoggle {
   display: block !important;
 }
@@ -300,7 +74,7 @@ small {
 
 .modalMain {
   background-color: white;
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease;
   transform: translateY(-100%);
   box-shadow: 0 6px 10px 0 rgb(0 0 0 / 14%), 0 5px 18px 0 rgb(0 0 0 / 12%), 0 3px 15px -1px rgb(0 0 0 / 20%);
 }
@@ -316,63 +90,13 @@ option > div {
   background-color: #000;
 }
 
-.blur {
-  filter: blur(5px);
-  overflow: hidden !important;
-}
-
 @media (hover: none) {
   .addButton:hover {
     background-color: #ffffff;
   }
 }
 
-@media (max-width: 1200px) {
-  #customNav,
-  .navFooter {
-    transform: translateX(-250px);
-    width: 0;
-    padding: 0;
-    border-width: 0 !important;
-    position: absolute;
-  }
-
-  .hamburger {
-    cursor: pointer;
-    border: 0;
-    left: 0;
-    margin-top: 5px;
-    z-index: 50;
-    outline: none;
-    display: block;
-    background-color: transparent;
-  }
-
-  .searchIconBG {
-    width: 0;
-  }
-
-  .navTitle {
-    display: none !important ;
-  }
-
-  #customNav nav {
-    margin-top: 60px !important;
-    overflow-y: scroll;
-    height: 90%;
-  }
-
-  #header {
-    opacity: 1;
-    height: auto;
-    transition: all 0.5s ease-in-out;
-  }
-}
-
 @media only screen and (max-width: 767px) {
-  .titleHome span {
-    font-size: 2.5rem;
-  }
   .addButton {
     right: 25px;
     bottom: 25px;
@@ -381,74 +105,4 @@ option > div {
     border-radius: 25px;
     padding: 9px;
   }
-}
-
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-  .mainBG {
-    height: 280px;
-  }
-}
-@media only screen and (max-width: 479px) {
-  .mainBG {
-    height: 250px;
-  }
-}
-
-/* custom themes for cards */
-
-.cusTheme-darkcyan {
-  border-top-color: darkcyan;
-  color: darkcyan;
-}
-.cusTheme-darkorchid {
-  border-top-color: darkorchid;
-  color: darkorchid;
-}
-.cusTheme-darkturquoise {
-  border-top-color: darkturquoise;
-  color: darkturquoise;
-}
-.cusTheme-deeppink {
-  border-top-color: deeppink;
-  color: deeppink;
-}
-.cusTheme-deepskyblue {
-  border-top-color: deepskyblue;
-  color: deepskyblue;
-}
-.cusTheme-forestgreen {
-  border-top-color: forestgreen;
-  color: forestgreen;
-}
-.cusTheme-goldenrod {
-  border-top-color: goldenrod;
-  color: goldenrod;
-}
-.cusTheme-indigo {
-  border-top-color: indigo;
-  color: indigo;
-}
-.cusTheme-mediumseagreen {
-  border-top-color: mediumseagreen;
-  color: mediumseagreen;
-}
-.cusTheme-orange {
-  border-top-color: orange;
-  color: orange;
-}
-.cusTheme-royalblue {
-  border-top-color: royalblue;
-  color: royalblue;
-}
-.cusTheme-slateblue {
-  border-top-color: slateblue;
-  color: slateblue;
-}
-.cusTheme-skyblue {
-  border-top-color: skyblue;
-  color: skyblue;
-}
-.cusTheme-teal {
-  border-top-color: teal;
-  color: teal;
 }

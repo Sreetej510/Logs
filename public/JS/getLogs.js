@@ -101,6 +101,8 @@ function createCard() {
     });
 
     var cardContainer = document.getElementById('cardContainer');
+    cardContainer.innerHTML = '';
+
 
     cards.forEach((obj) => {
         var group = obj['group'];
@@ -114,6 +116,7 @@ function createCard() {
         lastEdit = changeDate(lastEdit);
 
         var htmlElement = createHTML(group, name, link, description, latestLog, lastEdit, color);
+
         cardContainer.appendChild(htmlElement);
 
     });
@@ -175,7 +178,7 @@ function changeDate(dateTimeParam) {
 
     if (timeDiff < 86400000 && timeDiff > 3600000) {
         time = Math.floor(timeDiff / 3600000);
-        if (time == 1) {
+        if (time <= 1) {
             time = ' an hour ago';
         } else {
             time = time + ' hours ago';
@@ -183,7 +186,7 @@ function changeDate(dateTimeParam) {
     }
 
     if (timeDiff < 3600000) {
-        time = Math.floor(timeDiff / 600000);
+        time = Math.floor(timeDiff / 60000);
         if (time == 1) {
             time = ' a min ago';
         } else {
