@@ -1,10 +1,10 @@
 .card {
-  border-top: 0.2rem solid;
+  border-left: 0.2rem solid;
   font-weight: 400;
 }
 
 small {
-  color: #757575;
+  color: #959595;
   font-family: sans-serif;
 }
 
@@ -12,13 +12,7 @@ small {
   color: #111;
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.card-header > p {
+.card-body > .d-flex > p {
   align-self: baseline;
   margin-right: 5%;
   margin-bottom: 0.5rem;
@@ -29,24 +23,6 @@ small {
   width: 100%;
   height: 100%;
   position: absolute;
-}
-
-.addButton {
-  position: fixed;
-  right: 40px;
-  bottom: 40px;
-  width: 65px;
-  height: 65px;
-  border-radius: 33px;
-  background-color: #ffffff;
-  outline: none;
-  border: none;
-  padding: 13px;
-  box-shadow: 0 6px 10px 0 rgb(0 0 0 / 14%), 0 5px 18px 0 rgb(0 0 0 / 12%), 0 3px 15px -1px rgb(0 0 0 / 20%);
-}
-
-.addButton:hover {
-  background-color: #e5e5e5;
 }
 
 #addModalContainer {
@@ -90,19 +66,11 @@ option > div {
   background-color: #000;
 }
 
-@media (hover: none) {
-  .addButton:hover {
-    background-color: #ffffff;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .addButton {
-    right: 25px;
-    bottom: 25px;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    padding: 9px;
-  }
+#MainPage {
+  position: relative;
+  width: 100%;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  padding: 0;
 }

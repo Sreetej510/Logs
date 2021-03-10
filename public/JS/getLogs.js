@@ -6,96 +6,21 @@ window.onload = async function () {
 var cards = [];
 
 function getDocs(src = "cache") {
-    db.collection("Main").doc("allLogs").get({ source: src }).then((doc) => {
-        if (doc.exists) {
-            retrieve(doc.data(), src);
-        }
-    }).catch((error) => {
+    db.collection("allLogs").get({ source: src }).then((snapshot) => {
+        retrieve(snapshot.docs);
+    }).catch((e) => {
         getDocs("server");
     });
 }
 
-async function retrieve(groupNames, src) {
-
-    var groupsArray = groupNames["collectionNames"]
-    for (groupIndex in groupsArray) {
-        var groupName = groupsArray[groupIndex];
-        await db.collection("Main").doc("allLogs").collection(groupName)
-            .get({ source: src }).then((querySnapshot) => {
-                populate(groupName, querySnapshot);
-            });
-    }
-    createCard();
+async function retrieve(docs) {
+    await docs.forEach((doc) => {
+        cards.push(doc.data());
+    });
+    createCards();
 }
 
-function populate(groupName, data) {
-    var group = groupName;
-
-    data.forEach((doc) => {
-        var obj = doc.data();
-        obj.group = group;
-        cards.push(obj);
-    });
-
-    if (groupName == 'noGroup') {
-        createNavIndividual(data);
-    } else {
-        createNavGroup(data, group);
-    }
-
-};
-
-function createNavIndividual(data) {
-    data.forEach((doc) => {
-        var docData = doc.data();
-        var name = docData['name'];
-        var id = docData['id'];
-        var link = "logs.html?logId=" + id;
-
-        var nav = document.getElementById('nav');
-        var liElement = document.createElement('li');
-        liElement.classList.add('nav-item');
-
-        liElement.innerHTML = '<a class="nav-link" href=' + link + '>' + name + '</a>';
-        nav.appendChild(liElement);
-    });
-}
-
-function createNavGroup(data, group) {
-
-    var groupCollasedElement = document.createElement('div');
-    groupCollasedElement.setAttribute('class', 'container bg-light rounded')
-    groupCollasedElement.innerHTML = '<div class="navbar-collapse collapse ml-auto" id="' + group + '"><ul class="navbar-nav"></ul></div>'
-
-
-    var nav = document.getElementById('nav');
-    var liElement = document.createElement('li');
-    liElement.classList.add('nav-item');
-    liElement.innerHTML = '<a class="nav-link collapsed" data-target="' + group + '" href="#">' + group + '</a>'
-    nav.appendChild(liElement);
-    nav.appendChild(groupCollasedElement);
-
-    var groupContainer = document.getElementById(group).firstChild;
-
-    data.forEach((doc) => {
-        var liEle = document.createElement('li');
-        liEle.setAttribute('class', 'nav-item border-bottom');
-        var docData = doc.data();
-        var name = docData['name'];
-        var id = docData['id'];
-        var link = "logs.html?logId=" + id;
-
-        liEle.innerHTML = '<a class="nav-link" href="' + link + '">' + name + '</a>'
-
-        groupContainer.appendChild(liEle)
-
-    });
-
-    addCollaseListner();
-}
-
-function createCard() {
-
+function createCards() {
     cards.sort(function (a, b) {
         return b.lastEdit - a.lastEdit;
     });
@@ -130,20 +55,12 @@ function createHTML(group, name, link, description, latestLog, lastEdit, color) 
 
     var aElement = '<a href="' + link + '"></a>'
 
-    if (group == "noGroup") {
-        group = '';
-    }
 
-    var headerElement = '<div class="card-header"><h3 class="font_Comic">' + name + '</h3><p>' + group + '</p></div > ';
+    var headerElement = '<div class="card-body"><h5 class="font_Comic">' + name + '</h5> ';
 
-    var bodyElement = '<div class="card-body"><p class="card-text mb-0" style="width: 50%"> Description :</p><p class="card-text pl-4">' + description + ' </p><p class="card-text">';
+    var bodyElement = '<p class="card-text pl-4 m-0">' + description + ' </p><p class="card-text">';
 
-    if (latestLog) {
-        bodyElement += '<p class="card-text mb-0">Latest Log :</p><p class="card-text pl-4">' + latestLog + '</p>';
-    }
-
-
-    bodyElement += '<small class="text-muted"> Last updated ' + lastEdit + '</small></p></div>';
+    bodyElement += '<small> Last updated ' + lastEdit + '</small></p></div>';
 
     cardElement.innerHTML = aElement + headerElement + bodyElement;
 
@@ -198,11 +115,5 @@ function changeDate(dateTimeParam) {
 }
 
 function syncCache() {
-    db.collection("Main").doc("allLogs").get({ source: "server" }).then((doc) => {
-        if (doc.exists) {
-            doc.data().collectionNames.forEach(groupName => {
-                db.collection("Main").doc("allLogs").collection(groupName).get({ source: "server" });
-            });
-        }
-    });
+    db.collection("allLogs").get({ source: "server" });
 }

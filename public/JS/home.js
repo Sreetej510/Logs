@@ -12,18 +12,12 @@ document.getElementById('CreateLogForm').addEventListener('submit', function (e)
     var form = document.getElementById('CreateLogForm');
     var logName = form.elements[0].value;
     var description = form.elements[1].value;
-    var groupName = form.elements[2].value;
-    groupName = groupName.toLowerCase().trim()
-    if (groupName == '') {
-        groupName = 'noGroup';
-    }
-    var color = form.elements[3].value;
-    var keywordsString = form.elements[4].value;
+    var color = form.elements[2].value;
+    var keywordsString = form.elements[3].value;
     var keywords = keywordsString.split(',');
 
     keywords = keywords.map(name => name.toLowerCase());
 
-    console.log(logName, description, groupName, color, keywords);
     var id = new Date(Date.now()).getTime()
 
 
@@ -36,26 +30,11 @@ document.getElementById('CreateLogForm').addEventListener('submit', function (e)
         keywords: keywords,
     }
 
-    db.collection('Main/allLogs/' + groupName + '/').doc(id.toString()).set(obj);
+    db.collection('allLogs').doc(id.toString()).set(obj);
 
     addModalToggle();
+    createCards();
 
-    obj.group = groupName;
-    cards.push(obj);
-
-    createCard();
-
-    db.collection('Main').doc('allLogs').get({ source: 'cache' }).then((doc) => {
-
-        var groupNames = doc.data();
-
-        if (!(groupNames.collectionNames.includes(groupName))) {
-            groupNames.collectionNames.push(groupName);
-            db.collection('Main').doc('allLogs').set(groupNames)
-        }
-    });
-
-    db.collection('Main/detailedLogs/' + id.toString()).doc('metadata').set(obj);
-    db.collection('Main/detailedLogs/' + id.toString()).doc('logs').set({});
+    db.collection('detailedLogs').doc(id.toString()).set({});
 
 })

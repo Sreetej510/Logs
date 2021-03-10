@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="CSS/bootstrap.css" />
 
@@ -19,64 +19,46 @@
   </head>
 
   <body>
-    <!-- Search Menu -->
-    <div id="searchOverlay" class="d-none">
-      <div class="position-absolute h-100 w-100" onclick="searchMenuToggle()"></div>
-      <div class="searchBarContainer translate_70" id="searchBarContainer">
-        <form class="searchBar" id="searchBar">
-          <button type="button" onclick="searchMenuToggle()" class="backBtn">
-            <svg class="backSearch">
-              <path d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-            </svg>
-          </button>
-
-          <button type="button" onclick="search()" class="enterSearchBtn">
-            <svg class="enterSearch">
-              <path
-                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l
-              5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-              ></path>
-            </svg>
-          </button>
-
-          <input type="text" placeholder="Search this site" id="searchInput" oninput="searchChange(this)" />
-
-          <button type="button" onclick="searchClear()" class="clearSearchBtn" id="clearSearchBtn" style="display: none">
-            <svg class="clearSearch">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-              <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-          </button>
-        </form>
-      </div>
-    </div>
-
     <div class="container-fluid">
       <div class="row row-height" id="mainContainer">
-        <div id="navOverlay" class="d-none" onclick="menu()"></div>
-
         <!-- Navigation -->
-        <div class="container border-right border-3" id="customNav">
-          <!-- Logo and Title -->
-          <div class="navTitle d-flex flex-column justify-content-around pt-5" style="height: 30%">
-            <img class="logoImg pt-3" src="Images/log.svg" />
-            <h3 class="text-center pb-4 border-bottom mx-3 border-dark font_Comic">Logs</h3>
+        <div class="border-right border-3" id="customNav">
+          <!-- Search Bar -->
+
+          <div class="searchBarContainer" id="searchBarContainer">
+            <form class="searchBar row" id="searchBar">
+              <button type="button" onclick="search()" class="enterSearchBtn">
+                <svg class="enterSearch">
+                  <path
+                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l
+                    5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  ></path>
+                </svg>
+              </button>
+
+              <input type="text" placeholder="Search of Log" id="searchInput" oninput="searchChange(this)" class="col" />
+
+              <button type="button" onclick="searchClear()" class="clearSearchBtn" id="clearSearchBtn" style="display: none">
+                <svg class="clearSearch">
+                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                </svg>
+              </button>
+            </form>
           </div>
 
-          <!-- Navigation Buttons -->
-          <nav class="navbar navbar-light p-0 align-items-start">
-            <ul class="navbar-nav flex-column px-4 w-100 pb-4" id="nav">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-            </ul>
-          </nav>
+          <!-- Navigation Cards -->
+          <div id="cardContainer"></div>
 
-          <div class="navFooter">
+          <!-- Nav Footer -->
+          <div class="navFooter d-flex justify-content-around border-right border-top border-3">
             <form id="accessTokenForm">
               <input placeholder="Acess Token" value="dx92m09r38dg3567088b12a5c2d1502" id="accessToken" />
             </form>
+
+            <button onclick="addModalToggle()">
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false"><path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path></svg>
+            </button>
 
             <button onclick="displayAcessToken()">
               <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
@@ -90,46 +72,15 @@
         </div>
 
         <!-- Main Page -->
-        <div class="container col right" id="MainPage">
-          <header class="w-100 bg-white fixed-top mx-0" id="header">
+        <div class="container right" id="MainPage">
+          <header id="header">
             <img class="img-responsive py-2" src="Images/log.svg" style="width: 20px" />
             <span class="h5 align-middle px-3 font_Comic">Logs</span>
           </header>
-
-          <button class="hamburger fixed-top" type="button" onclick="menu()">
-            <svg class="ham hamRotate" id="ham" viewBox="0 0 100 100" width="40">
-              <path class="line top" d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -24" />
-              <path class="line middle" d="m 70,46 h -40" />
-              <path class="line bottom" d="m 30,59 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 24" />
-            </svg>
-          </button>
-
-          <button class="searchIcon" onclick="searchMenuToggle()">
-            <svg style="width: 24px; height: 24px">
-              <path
-                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l
-                5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-              ></path>
-            </svg>
-
-            <div class="searchIconBG"></div>
-          </button>
-
-          <div class="row row-centered mainBG">
-            <div class="w-100 h-100"></div>
-            <h1 class="col position-absolute titleHome"><span class="display-5 d-flex justify-content-center font_Comic">Home</span></h1>
-          </div>
-
-          <div class="mt-5 card-columns" id="cardContainer" style="display: inline-block"> </div>
-
-          <button class="addButton" onclick="addModalToggle()">
-            <svg viewBox="0 0 24 24" focusable="false"><path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path></svg>
-          </button>
         </div>
       </div>
 
       <!-- Add Modal -->
-
       <div id="addModalContainer">
         <div class="modalMain px-md-5" id="modalMain">
           <div class="container px-md-5 py-4 font_Comic">
@@ -137,9 +88,7 @@
             <form class="container p-4" id="CreateLogForm">
               <input class="col mb-3 form-control" name="logName" placeholder="Log Name" maxlength="15" required />
 
-              <textarea name="description form-control " class="col mb-2" rows="3" placeholder="Description" maxlength="180" required></textarea>
-
-              <input class="col mb-2 form-control" placeholder="Group Name" maxlength="15" />
+              <textarea name="description form-control " class="col mb-2" rows="3" placeholder="Description" maxlength="150" required></textarea>
 
               <div class="form-group mb-2 d-flex">
                 <label class="mr-3 col-form-label">Color : </label>
@@ -175,6 +124,7 @@
         <div onclick="addModalToggle()"></div>
       </div>
     </div>
+
     <script src="JS/app.js"></script>
     <script src="JS/searchBar.js"></script>
 
