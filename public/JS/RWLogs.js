@@ -53,7 +53,9 @@ function showDocs(docData, logID) {
         }
     })
 
-    div.innerHTML = titleLogHTML + logTextHTML + '</div > '
+    var saveHTML = '<button class="saveBtnMobile" onclick="saveLog(\'' + logID + '\')"><svg x="0px" y="0px" viewBox="0 0 512 512" style="width: 24px;height: 24px;"><path d="M412.907,214.08C398.4,140.693,333.653,85.333,256,85.333c-61.653,0-115.093,34.987-141.867,86.08    C50.027,178.347,0,232.64,0,298.667c0,70.72,57.28,128,128,128h277.333C464.213,426.667,512,378.88,512,320    C512,263.68,468.16,218.027,412.907,214.08z M298.667,277.333v85.333h-85.333v-85.333h-64L256,170.667l106.667,106.667H298.667z"></path></svg ></button > '
+
+    div.innerHTML = titleLogHTML + logTextHTML + '</div > ' + saveHTML;
     assignQuerySelector(div);
     var continer = document.getElementById('allLogsContainer');
     continer.insertBefore(div, continer.firstChild);
@@ -89,7 +91,7 @@ document.getElementById('addKeywords').addEventListener('submit', function (e) {
 
 
 
-function syncLogCache(id = document.getElementById('infoModalContainer').getAttribute('eleID')) {
+function syncLogCache(id) {
     db.collection('allLogs').doc(id.toString()).get()
     db.collection('detailedLogs').doc(id.toString()).collection('logs').get()
 }
@@ -109,7 +111,7 @@ function assignQuerySelector(item) {
     });
 
     item.children[0].addEventListener('keydown', function (e) {
-        if (e.keyCode == 13) {
+        if (e.key === 'Enter') {
             e.preventDefault();
         }
     });
@@ -121,9 +123,10 @@ function assignQuerySelector(item) {
 
 
 //save log start
-function saveLog(item) {
+function saveLog(id) {
     var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
-    var logID = item.getAttribute('id');
+    var item = document.getElementById(id);
+    var logID = id;
     var name = item.children[0].innerHTML;
     var log = []
 

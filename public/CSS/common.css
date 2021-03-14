@@ -144,6 +144,9 @@
 #backBtn{
   display: none;
 }
+.saveBtnMobile {
+  display: none;
+}
 
 @media (max-width: 1200px) and (min-width: 1000px) {
   #customNav,
@@ -166,7 +169,16 @@
     position: fixed;
   }
 
-  #customNav.active{
+  .saveBtnMobile  {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 25px;
+    background: none;
+    border: none;
+  }
+
+  #customNav.inactive{
     transform: translateX(-100%);
   }
 

@@ -132,5 +132,5 @@ function addNewLog() {
 }
 
 function toggleNav() {
-    document.getElementById('customNav').classList.toggle('active');
+    document.getElementById('customNav').classList.toggle('inactive');
 }
