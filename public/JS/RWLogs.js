@@ -1,0 +1,208 @@
+function openLog(id, name) {
+    setTitle(name, id);
+    setLogs(id);
+    toggleNav();
+    syncLogCache(id);
+}
+
+function setTitle(name, id) {
+    document.getElementById('Title').innerHTML = name;
+    var keywords;
+    db.collection('allLogs').doc(id).get({ source: 'cache' }).then((doc) => {
+        keywords = doc.data().keywords;
+        var tempString = keywords.join(',   ');
+
+        document.getElementById('keywords').innerHTML = tempString;
+    });
+    document.getElementById('infoModalContainer').setAttribute('eleid', id);
+}
+
+
+
+async function setLogs(id) {
+    document.getElementById('allLogsContainer').setAttribute('eleid', id);
+    await db.collection('/detailedLogs/' + id + '/logs').get().then((allDocs) => {
+        document.getElementById('allLogsContainer').innerHTML = '';
+        allDocs.forEach((doc) => {
+            showDocs(doc.data(), doc.id);
+        })
+    })
+}
+
+
+
+function showDocs(docData, logID) {
+    var div = document.createElement('div');
+    div.setAttribute('class', 'logContainer');
+    div.setAttribute('id', logID);
+
+    var titleLogHTML = '<h5 contenteditable="true" class="logTitle">' + docData.name + '</h5>';
+
+    var logTextHTML = '<div contenteditable = "true" >'
+
+    docData.log.forEach(ele => {
+        if (typeof ele == 'string') {
+            logTextHTML += '<div>' + ele + '</div>';
+        }
+        if (typeof ele == 'object') {
+            logTextHTML += '<ul>';
+            for (var i = 0; i < ele.ul.length; i++) {
+                logTextHTML += '<li>' + ele.ul[i] + '</li> ';
+            }
+            logTextHTML += '</ul>';
+        }
+    })
+
+    div.innerHTML = titleLogHTML + logTextHTML + '</div > '
+    assignQuerySelector(div);
+    var continer = document.getElementById('allLogsContainer');
+    continer.insertBefore(div, continer.firstChild);
+}
+
+
+
+// keywords update
+document.getElementById('addKeywords').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var keyword = document.getElementById('addKeywords')[0].value;
+    keyword = keyword.toLowerCase().trim();
+
+    document.getElementById('addKeywords')[0].value = '';
+
+    var tempArr = document.getElementById('keywords').innerHTML.split(',')
+    tempArr = tempArr.map(s => s.trim());
+    var index = tempArr.indexOf(keyword)
+    if (index > -1) {
+        tempArr.splice(index, 1)
+    } else {
+        tempArr.push(keyword)
+    }
+    document.getElementById('keywords').innerHTML = tempArr.join(', ')
+
+    var id = document.getElementById('infoModalContainer').getAttribute('eleid');
+
+    db.collection('allLogs').doc(id).update('keywords', tempArr);
+
+})
+// keywords update
+
+
+
+
+function syncLogCache(id = document.getElementById('infoModalContainer').getAttribute('eleID')) {
+    db.collection('allLogs').doc(id.toString()).get()
+    db.collection('detailedLogs').doc(id.toString()).collection('logs').get()
+}
+
+var currentLog;
+
+function assignQuerySelector(item) {
+    item.addEventListener('keydown', function (e) {
+        if (e.key == 's' && e.ctrlKey == true) {
+            e.preventDefault();
+            if (item.textContent.trim() != '') {
+                saveLog(item);
+            } else {
+                deleteLog(item);
+            }
+        }
+    });
+
+    item.children[0].addEventListener('keydown', function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+        }
+    });
+
+    item.addEventListener('click', function (e) {
+        currentLog = item.getAttribute("id")
+    })
+}
+
+
+//save log start
+function saveLog(item) {
+    var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
+    var logID = item.getAttribute('id');
+    var name = item.children[0].innerHTML;
+    var log = []
+
+    var textChildren = item.children[1].children;
+
+    var notNestedText = item.children[1].firstChild;
+    if (notNestedText.tagName == undefined) {
+        log.push(notNestedText.textContent)
+    }
+
+    for (let index = 0; index < textChildren.length; index++) {
+        var type = textChildren[index].tagName;
+        if (type == 'DIV') {
+            log.push(textChildren[index].innerHTML)
+        }
+        if (type == 'UL') {
+            var tempEle = textChildren[index].children;
+            var tempArr = []
+            for (let i = 0; i < tempEle.length; i++) {
+                const element = tempEle[i];
+                tempArr.push(element.innerHTML);
+            }
+            log.push({ ul: tempArr });
+        }
+    }
+    db.collection('detailedLogs/' + eleID + '/logs').doc(logID).set({
+        name: name,
+        log: log
+    })
+}
+//save log end
+
+
+//delete log start
+function deleteLog(item) {
+    var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
+    var logID = item.getAttribute('id');
+    db.collection('detailedLogs/' + eleID + '/logs').doc(logID).delete();
+    document.getElementById('allLogsContainer').removeChild(document.getElementById(logID));
+}
+//delete log end
+
+function deleteTotalToggle() {
+    var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
+    document.getElementById('deleteModal').children[2].value = '';
+    document.getElementById('safeword').innerHTML = eleID;
+    document.getElementById('mainContainer').classList.toggle('blur');
+    document.getElementById('deleteModalContainer').classList.toggle('modaltoggle');
+    setTimeout(() => {
+        document.getElementById('deleteModal').classList.toggle('transform');
+    }, 1);
+    document.getElementById('deleteBtn').setAttribute('disabled', 'true');
+
+}
+
+function deleteTotalLog() {
+    var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
+    db.collection('allLogs').doc(eleID).delete();
+    db.collection('detailedLogs/' + eleID + '/logs').get().then((snapshot) => {
+        snapshot.forEach((doc) => {
+            db.collection('detailedLogs/' + eleID + '/logs').doc(doc.id).delete();
+        })
+    });
+    db.collection('detailedLogs').doc(eleID).delete();
+    document.getElementById(eleID).remove();
+    deleteTotalToggle();
+}
+
+function checkIdToDelete(ele) {
+    var eleID = document.getElementById('safeword').innerHTML;
+    if (eleID == ele.value) {
+        document.getElementById('deleteBtn').removeAttribute('disabled');
+    } else {
+        document.getElementById('deleteBtn').setAttribute('disabled', 'true');
+    }
+}
+
+
+function addBullet() {
+    var ele = document.getElementById(currentLog);
+    ele.children[1].innerHTML += '<ul><li></li></ul>'
+}

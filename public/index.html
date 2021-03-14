@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Roboto&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="CSS/common.css" />
     <link rel="stylesheet" href="CSS/home.css" />
+    <link rel="stylesheet" href="CSS/common.css" />
     <link rel="stylesheet" href="CSS/searchBar.css" />
 
     <link rel="icon" href="Images/log.svg" />
@@ -19,6 +19,16 @@
   </head>
 
   <body>
+    <style id="scrollStyleMainPage">
+      #MainPage::-webkit-scrollbar-thumb {
+        background-color: #0000;
+      }
+    </style>
+    <style id="scrollStyleNav">
+      #cardContainer::-webkit-scrollbar-thumb {
+        background-color: #0000;
+      }
+    </style>
     <div class="container-fluid">
       <div class="row row-height" id="mainContainer">
         <!-- Navigation -->
@@ -48,7 +58,7 @@
           </div>
 
           <!-- Navigation Cards -->
-          <div id="cardContainer"></div>
+          <div id="cardContainer"> </div>
 
           <!-- Nav Footer -->
           <div class="navFooter d-flex justify-content-around border-right border-top border-3">
@@ -72,11 +82,67 @@
         </div>
 
         <!-- Main Page -->
-        <div class="container right" id="MainPage">
+        <div class="right" id="MainPage">
+          <!-- header -->
           <header id="header">
-            <img class="img-responsive py-2" src="Images/log.svg" style="width: 20px" />
-            <span class="h5 align-middle px-3 font_Comic">Logs</span>
+            <div class="headerBtns" id="backBtn">
+              <button onclick="toggleNav()">
+                <svg x="0px" y="0px" viewBox="0 0 55.753 55.753" style="enable-background: new 0 0 55.753 55.753">
+                  <path
+                    d="M12.745,23.915c0.283-0.282,0.59-0.52,0.913-0.727L35.266,1.581c2.108-2.107,5.528-2.108,7.637,0.001   c2.109,2.108,2.109,5.527,0,7.637L24.294,27.828l18.705,18.706c2.109,2.108,2.109,5.526,0,7.637   c-1.055,1.056-2.438,1.582-3.818,1.582s-2.764-0.526-3.818-1.582L13.658,32.464c-0.323-0.207-0.632-0.445-0.913-0.727   c-1.078-1.078-1.598-2.498-1.572-3.911C11.147,26.413,11.667,24.994,12.745,23.915z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <span id="Title" class="px-md-5 px-2 font_Comic">Logs</span>
+            <div class="headerBtns">
+              <button onclick="addNewLog()">
+                <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+                  <path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path>
+                </svg>
+              </button>
+
+              <button onclick="addBullet()">
+                <svg x="0px" y="0px" width="612px" height="612px" viewBox="0 0 612 612" style="enable-background: new 0 0 612 612">
+                  <path
+                    d="M63.311,73.862C28.342,73.862,0,102.204,0,137.172s28.342,63.311,63.311,63.311c34.968,0,63.31-28.342,63.31-63.311     S98.279,73.862,63.311,73.862z M63.311,242.689C28.342,242.689,0,271.032,0,306c0,34.969,28.342,63.311,63.311,63.311     c34.968,0,63.31-28.342,63.31-63.311C126.621,271.032,98.279,242.689,63.311,242.689z M63.311,411.518 
+                        C28.342,411.518,0,439.859,0,474.827c0,34.969,28.342,63.311,63.311,63.311c34.968,0,63.31-28.342,63.31-63.311     C126.621,439.859,98.279,411.518,63.311,411.518z M232.138,179.379h337.655c23.319,0,42.207-18.888,42.207-42.207     s-18.888-42.207-42.207-42.207H232.138c-23.319,0-42.207,18.888-42.207,42.207S208.819,179.379,232.138,179.379z    
+                          M569.793,263.793H232.138c-23.319,0-42.207,18.888-42.207,42.207s18.888,42.207,42.207,42.207h337.655     C593.112,348.207,612,329.319,612,306S593.112,263.793,569.793,263.793z M569.793,432.621H232.138     c-23.319,0-42.207,18.887-42.207,42.206s18.888,42.207,42.207,42.207h337.655c23.319,0,42.207-18.888,42.207-42.207     S593.112,432.621,569.793,432.621z"
+                  />
+                </svg>
+              </button>
+
+              <button onclick="infoModalToggle()">
+                <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+                  <path
+                    d="M13.85 22.25h-3.7c-.74 0-1.36-.54-1.45-1.27l-.27-1.89c-.27-.14-.53-.29-.79-.46l-1.8.72c-.7.26-1.47-.03-1.81-.65L2.2 15.53c-.35-.66-.2-1.44.36-1.88l1.53-1.19c-.01-.15-.02-.3-.02-.46 0-.15.01-.31.02-.46l-1.52-1.19c-.59-.45-.74-1.26-.37-1.88l1.85-3.19c.34-.62 1.11-.9 1.79-.63l1.81.73c.26-.17.52-.32.78-.46l.27-1.91c.09-.7.71-1.25 1.44-1.25h3.7c.74 0 1.36.54 1.45 1.27l.27 1.89c.27.14.53.29.79.46l1.8-.72c.71-.26 1.48.03 1.82.65l1.84 3.18c.36.66.2 1.44-.36 1.88l-1.52 1.19c.01.15.02.3.02.46s-.01.31-.02.46l1.52 1.19c.56.45.72 1.23.37 1.86l-1.86 3.22c-.34.62-1.11.9-1.8.63l-1.8-.72c-.26.17-.52.32-.78.46l-.27 1.91c-.1.68-.72 1.22-1.46 1.22zm-3.23-2h2.76l.37-2.55.53-.22c.44-.18.88-.44 1.34-.78l.45-.34 2.38.96 1.38-2.4-2.03-1.58.07-.56c.03-.26.06-.51.06-.78s-.03-.53-.06-.78l-.07-.56 2.03-1.58-1.39-2.4-2.39.96-.45-.35c-.42-.32-.87-.58-1.33-.77l-.52-.22-.37-2.55h-2.76l-.37 2.55-.53.21c-.44.19-.88.44-1.34.79l-.45.33-2.38-.95-1.39 2.39 2.03 1.58-.07.56a7 7 0 0 0-.06.79c0 .26.02.53.06.78l.07.56-2.03 1.58 1.38 2.4 2.39-.96.45.35c.43.33.86.58 1.33.77l.53.22.38 2.55z"
+                  ></path>
+                  <circle cx="12" cy="12" r="3.5"></circle>
+                </svg>
+              </button>
+
+              <button onclick="deleteTotalToggle()">
+                <svg viewBox="0 0 384 384" style="enable-background: new 0 0 384 384">
+                  <path d="M64,341.333C64,364.907,83.093,384,106.667,384h170.667C300.907,384,320,364.907,320,341.333v-256H64V341.333z" />
+                  <polygon points="266.667,21.333 245.333,0 138.667,0 117.333,21.333 42.667,21.333 42.667,64 341.333,64 341.333,21.333 			" />
+                </svg>
+              </button>
+
+              <button onclick="syncLogCache()">
+                <svg viewBox="0 0 509.536 509.536">
+                  <path
+                    d="M260.182,64.496V0l-117.2,117.2l117.2,117.2v-64.624c137.072-11.44,225.536,79.728,247.84,199.584  C522.47,195.296,410.694,92.352,260.182,64.496z"
+                  />
+                  <path
+                    d="M251.99,444.368v65.168l118.432-118.432L251.99,272.672v65.296  c-110,9.184-221.424-45.744-250.464-201.696C-13.098,312.576,100.406,416.304,251.99,444.368z"
+                  />
+                </svg>
+              </button>
+            </div>
           </header>
+
+          <!-- logs content -->
+          <div id="allLogsContainer" class="font_Comic"> </div>
         </div>
       </div>
 
@@ -88,7 +154,7 @@
             <form class="container p-4" id="CreateLogForm">
               <input class="col mb-3 form-control" name="logName" placeholder="Log Name" maxlength="15" required />
 
-              <textarea name="description form-control " class="col mb-2" rows="3" placeholder="Description" maxlength="150" required></textarea>
+              <textarea name="description" class="col mb-2 form-control" rows="2" placeholder="Description" maxlength="150" required></textarea>
 
               <div class="form-group mb-2 d-flex">
                 <label class="mr-3 col-form-label">Color : </label>
@@ -123,6 +189,40 @@
 
         <div onclick="addModalToggle()"></div>
       </div>
+
+      <!-- Info Modal -->
+      <div id="infoModalContainer" eleID="">
+        <div onclick="infoModalToggle()"></div>
+        <div class="infoModal font_Comic" id="infoModal">
+          <button class="closeBtn" onclick="infoModalToggle()">
+            <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
+            </svg>
+          </button>
+          <span>Keywords : </span>
+          <br />
+          <span id="keywords">empty</span>
+          <form id="addKeywords">
+            <input placeholder="Keyword Here" />
+            <button type="submit">Add/Delete</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- confirm delete Modal -->
+      <div id="deleteModalContainer">
+        <div onclick="deleteTotalToggle()"></div>
+        <div class="deleteModal font_Comic" id="deleteModal">
+          <h4 class="text-danger mx-auto">Delete</h4>
+          <span>Type <strong id="safeword" class="text-danger"></strong> to enable delete button</span>
+          <br />
+          <input placeholder="Type Id here" onkeyup="checkIdToDelete(this)" />
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-danger" id="deleteBtn" onclick="deleteTotalLog()" disabled="ture">Delete</button>
+            <button class="btn btn-primary" onclick="deleteTotalToggle()">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="JS/app.js"></script>
@@ -152,8 +252,8 @@
       firebase.auth().signInWithEmailAndPassword(email, pwd);
     </script>
 
-    <script src="JS/getLogs.js"></script>
-    <script src="JS/common.js"></script>
+    <script src="JS/getLogsNav.js"></script>
     <script src="JS/home.js"></script>
+    <script src="JS/RWLogs.js"></script>
   </body>
 </html>

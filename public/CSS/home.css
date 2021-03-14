@@ -25,7 +25,9 @@ small {
   position: absolute;
 }
 
-#addModalContainer {
+#addModalContainer,
+#infoModalContainer,
+#deleteModalContainer {
   display: none;
   top: 0;
   left: 0;
@@ -41,7 +43,9 @@ small {
   display: block !important;
 }
 
-#addModalContainer > :last-child {
+#addModalContainer > :last-child,
+#infoModalContainer > :first-child ,
+#deleteModalContainer > :first-child {
   left: 0;
   position: absolute;
   height: 100%;
@@ -66,11 +70,107 @@ option > div {
   background-color: #000;
 }
 
+.infoModal {
+  z-index: 100;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  padding: 80px 25px;
+  background-color: white;
+  transition: all 0.2s ease;
+  transform: translateX(100%);
+}
+
+.infoModal.transform {
+  transform: translateX(0) !important;
+}
+
+.closeBtn {
+  padding: 10px;
+  position: absolute;
+  outline: none;
+  top: 30px;
+  right: 30px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+}
+
+.closeBtn:hover {
+  background-color: #e5e5e5 !important;
+}
+
+#keywords {
+  padding: 10px;
+}
+
+#addKeywords {
+  border-top: #7070704f dashed 1px;
+  margin-top: 50px;
+  padding: 10px;
+}
+
+.deleteModal{
+  z-index: 100;
+  width: 350px;
+  padding:25px 40px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 10px;
+  background-color: white;
+  transition: all 0.2s ease;
+  transform: translateY(-100%);
+}
+
+.deleteModal > *{
+  margin: 10px 0;
+}
+
+.deleteModal.transform {
+  transform: translateY(0) !important;
+}
+
+
 #MainPage {
   position: relative;
-  width: 100%;
+  width: calc(100% - 450px);
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
-  padding: 0;
+  margin-top: 50px;
+  height: 100%;
+  overflow-y: scroll;
 }
+
+#allLogsContainer {
+  width: 700px;
+  height: 100%;
+  margin: auto;
+  padding-left: 20px;
+  color: #454545;
+}
+
+
+.logContainer {
+  padding: 50px 50px;
+  width: 100%;
+  border-bottom: #4e40404f dashed 2px;
+}
+.logContainer > * {
+  outline: none;
+  min-height: 30px;
+}
+
+.logContainer ul{
+  margin: 0;
+  padding-left: 1rem;
+}
+
+
+.logTitle{
+  color: black;
+  transform: translateX(-25px);
+
+}
+
+

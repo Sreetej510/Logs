@@ -28,19 +28,15 @@ function createCards() {
     var cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
 
-
     cards.forEach((obj) => {
-        var group = obj['group'];
         var name = obj['name'];
         var id = obj['id'];
-        var link = "logs.html?logId=" + id;
         var color = obj['color'];
         var description = obj['description'];
-        var latestLog = obj['latestLog'];
         var lastEdit = obj['lastEdit']['seconds'];
         lastEdit = changeDate(lastEdit);
 
-        var htmlElement = createHTML(group, name, link, description, latestLog, lastEdit, color);
+        var htmlElement = createHTML(name, id, description, lastEdit, color);
 
         cardContainer.appendChild(htmlElement);
 
@@ -49,11 +45,12 @@ function createCards() {
 
 }
 
-function createHTML(group, name, link, description, latestLog, lastEdit, color) {
+function createHTML(name, id, description, lastEdit, color) {
     var cardElement = document.createElement('div');
     cardElement.setAttribute('class', 'card mb-3 cusTheme-' + color);
+    cardElement.setAttribute('id', id);
 
-    var aElement = '<a href="' + link + '"></a>'
+    var aElement = '<a href="#" onclick="openLog(\'' + id + '\',\'' + name + '\')" ></a>'
 
 
     var headerElement = '<div class="card-body"><h5 class="font_Comic">' + name + '</h5> ';

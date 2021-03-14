@@ -1,4 +1,4 @@
-
+// Create Log Start
 function addModalToggle() {
     document.getElementById('mainContainer').classList.toggle('blur');
     document.getElementById('addModalContainer').classList.toggle('modaltoggle');
@@ -6,6 +6,7 @@ function addModalToggle() {
         document.getElementById('modalMain').classList.toggle('transform');
     }, 1);
 }
+
 
 document.getElementById('CreateLogForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -18,7 +19,7 @@ document.getElementById('CreateLogForm').addEventListener('submit', function (e)
 
     keywords = keywords.map(name => name.toLowerCase());
 
-    var id = new Date(Date.now()).getTime()
+    var id = Date.now().toString();
 
 
     var obj = {
@@ -30,11 +31,106 @@ document.getElementById('CreateLogForm').addEventListener('submit', function (e)
         keywords: keywords,
     }
 
-    db.collection('allLogs').doc(id.toString()).set(obj);
+    db.collection('allLogs').doc(id).set(obj);
 
     addModalToggle();
+
+    cards.push(obj);
     createCards();
 
-    db.collection('detailedLogs').doc(id.toString()).set({});
+    db.collection('detailedLogs/' + id + '/logs').doc(Date.now().toString()).set({
+        name: 'Title Here',
+        log: ['Text goes Here']
+    });
 
 })
+// Create Log End
+
+
+// Scroll Start
+
+var MainScrollTimer = -1;
+var NavScrollTimer = -1;
+
+document.getElementById('MainPage').addEventListener('scroll', (e) => { MainPageScroll() });
+document.getElementById('cardContainer').addEventListener('scroll', (e) => { NavScroll() });
+
+function MainPageScroll() {
+    document.getElementById('scrollStyleMainPage').innerHTML = '';
+
+    if (MainScrollTimer != -1)
+        clearTimeout(MainScrollTimer);
+
+    MainScrollTimer = window.setTimeout("MainScrollFinished()", 1000);
+}
+function MainScrollFinished() {
+    document.getElementById('scrollStyleMainPage').innerHTML = '#MainPage::-webkit-scrollbar-thumb { background-color:#0000;}'
+}
+
+function NavScroll() {
+    document.getElementById('scrollStyleNav').innerHTML = '';
+
+    if (NavScrollTimer != -1)
+        clearTimeout(NavScrollTimer);
+
+    NavScrollTimer = window.setTimeout("NavScrollFinished()", 1000);
+}
+
+function NavScrollFinished() {
+    document.getElementById('scrollStyleNav').innerHTML = '#cardContainer::-webkit-scrollbar-thumb { background-color:#0000;}'
+}
+// Scroll End
+
+
+
+// Login Start
+function displayAcessToken() {
+    document.getElementById("accessTokenForm").classList.toggle("tokenDisplay");
+}
+
+document.getElementById("accessTokenForm").addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var formInput = document.getElementById("accessToken");
+
+    var accessToken = formInput.value;
+    var keys = accessToken.split("-")
+
+    localStorage.setItem("key1", keys[0]);
+    localStorage.setItem("key2", keys[1]);
+    formInput.value = "dx92m09r38dg3567088b12a5c2d1502";
+    displayAcessToken();
+});
+// Login End
+
+
+
+function infoModalToggle() {
+    document.getElementById('mainContainer').classList.toggle('blur');
+    document.getElementById('infoModalContainer').classList.toggle('modaltoggle');
+    setTimeout(() => {
+        document.getElementById('infoModal').classList.toggle('transform');
+    }, 1);
+}
+
+
+
+function addNewLog() {
+    var id = Date.now();
+
+    var div = document.createElement('div');
+    div.setAttribute('class', 'logContainer');
+    div.setAttribute('id', id.toString());
+
+    div.innerHTML = '<h5 contenteditable="true" class="logTitle"> Title Here </h5><div contenteditable = "true" ><div type="text"> Log Here</div></div> '
+
+    assignQuerySelector(div)
+
+
+    var continer = document.getElementById('allLogsContainer');
+    continer.insertBefore(div, continer.firstChild);
+}
+
+function toggleNav() {
+    document.getElementById('customNav').classList.toggle('active');
+}
