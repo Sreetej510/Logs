@@ -170,9 +170,8 @@
   }
 
   .saveBtnMobile  {
-    display: block;
     position: absolute;
-    top: 30px;
+    margin-top: -30px;
     right: 25px;
     background: none;
     border: none;
@@ -213,6 +212,11 @@
     transform: translateX(-15px);
     font: 1.4rem;   
   }
+
+  .logContainer:focus-within > .saveBtnMobile{
+    display: block;
+  }
+
 }
 
 /* custom themes for cards */

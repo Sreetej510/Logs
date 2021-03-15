@@ -31,6 +31,7 @@ async function setLogs(id) {
 
 
 
+//#region show docs from db start
 function showDocs(docData, logID) {
     var div = document.createElement('div');
     div.setAttribute('class', 'logContainer');
@@ -53,17 +54,18 @@ function showDocs(docData, logID) {
         }
     })
 
-    var saveHTML = '<button class="saveBtnMobile" onclick="saveLog(\'' + logID + '\')"><svg x="0px" y="0px" viewBox="0 0 512 512" style="width: 24px;height: 24px;"><path d="M412.907,214.08C398.4,140.693,333.653,85.333,256,85.333c-61.653,0-115.093,34.987-141.867,86.08    C50.027,178.347,0,232.64,0,298.667c0,70.72,57.28,128,128,128h277.333C464.213,426.667,512,378.88,512,320    C512,263.68,468.16,218.027,412.907,214.08z M298.667,277.333v85.333h-85.333v-85.333h-64L256,170.667l106.667,106.667H298.667z"></path></svg ></button > '
+    var saveHTML = '<button class="saveBtnMobile" onclick="save_deleteLog(\'' + logID + '\')"><svg x="0px" y="0px" viewBox="0 0 512 512" style="width: 24px;height: 24px;"><path d="M412.907,214.08C398.4,140.693,333.653,85.333,256,85.333c-61.653,0-115.093,34.987-141.867,86.08    C50.027,178.347,0,232.64,0,298.667c0,70.72,57.28,128,128,128h277.333C464.213,426.667,512,378.88,512,320    C512,263.68,468.16,218.027,412.907,214.08z M298.667,277.333v85.333h-85.333v-85.333h-64L256,170.667l106.667,106.667H298.667z"></path></svg ></button > '
 
     div.innerHTML = titleLogHTML + logTextHTML + '</div > ' + saveHTML;
     assignQuerySelector(div);
     var continer = document.getElementById('allLogsContainer');
     continer.insertBefore(div, continer.firstChild);
 }
+//#endregion show docs from db
 
 
 
-// keywords update
+//#region keywords update
 document.getElementById('addKeywords').addEventListener('submit', function (e) {
     e.preventDefault();
     var keyword = document.getElementById('addKeywords')[0].value;
@@ -86,15 +88,16 @@ document.getElementById('addKeywords').addEventListener('submit', function (e) {
     db.collection('allLogs').doc(id).update('keywords', tempArr);
 
 })
-// keywords update
+//#endregion keywords update
 
 
 
-
+//#region sync cache
 function syncLogCache(id) {
     db.collection('allLogs').doc(id.toString()).get()
     db.collection('detailedLogs').doc(id.toString()).collection('logs').get()
 }
+//#endregion sync cache
 
 var currentLog;
 
@@ -102,11 +105,7 @@ function assignQuerySelector(item) {
     item.addEventListener('keydown', function (e) {
         if (e.key == 's' && e.ctrlKey == true) {
             e.preventDefault();
-            if (item.textContent.trim() != '') {
-                saveLog(item);
-            } else {
-                deleteLog(item);
-            }
+            save_deleteLog(item.getAttribute('id'));
         }
     });
 
@@ -121,21 +120,32 @@ function assignQuerySelector(item) {
     })
 }
 
+function save_deleteLog(id) {
+    var item = document.getElementById(id);
+    if (item.textContent.trim() != '') {
+        saveLog(item);
+    } else {
+        deleteLog(item);
+    }
+}
+
 
 //save log start
-function saveLog(id) {
+function saveLog(item) {
     var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
-    var item = document.getElementById(id);
-    var logID = id;
+    var logID = item.getAttribute('id');
     var name = item.children[0].innerHTML;
     var log = []
 
     var textChildren = item.children[1].children;
 
     var notNestedText = item.children[1].firstChild;
-    if (notNestedText.tagName == undefined) {
-        log.push(notNestedText.textContent)
-    }
+    try {
+
+        if (notNestedText.tagName == undefined) {
+            log.push(notNestedText.textContent)
+        }
+    } catch (e) { }
 
     for (let index = 0; index < textChildren.length; index++) {
         var type = textChildren[index].tagName;
@@ -155,6 +165,9 @@ function saveLog(id) {
     db.collection('detailedLogs/' + eleID + '/logs').doc(logID).set({
         name: name,
         log: log
+    })
+    db.collection('allLogs').doc(eleID).update({
+        lastEdit: firebase.firestore.Timestamp.now(),
     })
 }
 //save log end
@@ -203,7 +216,6 @@ function checkIdToDelete(ele) {
         document.getElementById('deleteBtn').setAttribute('disabled', 'true');
     }
 }
-
 
 function addBullet() {
     var ele = document.getElementById(currentLog);
