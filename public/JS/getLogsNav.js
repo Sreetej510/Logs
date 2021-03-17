@@ -17,18 +17,21 @@ async function retrieve(docs) {
     await docs.forEach((doc) => {
         cards.push(doc.data());
     });
-    createCards();
+    createCards(cards);
 }
 
-function createCards() {
-    cards.sort(function (a, b) {
+var clickedLog = false;
+
+function createCards(inputCards) {
+    inputCards.sort(function (a, b) {
         return b.lastEdit - a.lastEdit;
     });
 
     var cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
 
-    cards.forEach((obj) => {
+
+    inputCards.forEach((obj) => {
         var name = obj['name'];
         var id = obj['id'];
         var color = obj['color'];
@@ -40,9 +43,11 @@ function createCards() {
 
         cardContainer.appendChild(htmlElement);
 
+        if (!clickedLog) {
+            clickedLog = true;
+            openLog(id, name, false)
+        }
     });
-
-
 }
 
 function createHTML(name, id, description, lastEdit, color) {

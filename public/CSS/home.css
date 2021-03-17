@@ -156,9 +156,9 @@ option > div {
   width: 100%;
   border-bottom: #4e40404f dashed 2px;
 }
-.logContainer > * {
+.logContainer  * {
   outline: none;
-  min-height: 30px;
+  min-height: 10px;
 }
 
 .logContainer ul{
@@ -166,11 +166,27 @@ option > div {
   padding-left: 1rem;
 }
 
+.logContainer ol{
+  margin: 0;
+  padding-left: 0;
+}
 
 .logTitle{
   color: black;
   transform: translateX(-25px);
-
 }
 
+.strikeThrough{
+  text-decoration: line-through;
+  color: gray;
+}
 
+.cursorForStrike li:hover{
+  cursor:default;
+  background-color: #b6b6b64f;
+}
+
+.stikeBtnActive{
+  background-color: crimson !important;
+  fill: white;
+}

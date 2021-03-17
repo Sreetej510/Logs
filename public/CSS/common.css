@@ -124,21 +124,32 @@
 }
 
 #header button {
-  margin: 0 10px;
-  outline: none;
+  width: 40px;
+  height: 40px;
   border: none;
-  padding: 0px;
   border-radius: 50%;
+  padding: 0;
   background-color: transparent;
+  outline: none;
 }
 
 #header button:hover {
   background-color: #e5e5e5;
 }
 
+button{
+  transition: scale 0.3s ease;
+}
+
+button:active{
+  transform: scale(0.9);
+}
+
 #header svg {
   width: 24px;
   height: 24px;
+  position: absolute;
+  transform: translate(-50%,-50%);
 }
 
 #backBtn{
@@ -169,15 +180,19 @@
     position: fixed;
   }
 
+  #header > span{
+    font-size: 1.3rem;
+  }
+
   .saveBtnMobile  {
     position: absolute;
-    margin-top: -30px;
     right: 25px;
     background: none;
     border: none;
+    z-index: 10;
   }
 
-  #customNav.inactive{
+  #customNav.inactive {
     transform: translateX(-100%);
   }
 
@@ -199,10 +214,16 @@
   #header {
     padding: 7px 10px;
   }
+
+  #header button{
+    width: 25px;
+    height: 25px;
+  }
   
   #header svg {
   width: 15px;
   height: 15px;
+  top: 50%;
   }
 
   #backBtn{
@@ -210,7 +231,7 @@
   }
   .logTitle{
     transform: translateX(-15px);
-    font: 1.4rem;   
+    font-size: 1.3rem;   
   }
 
   .logContainer:focus-within > .saveBtnMobile{
@@ -282,4 +303,13 @@
   button:hover {
     background-color: transparent !important;
   }
+  
+  .cursorForStrike li:hover{
+    cursor:default;
+  }
+
+  .stikeBtnActive:hover{
+    background-color: crimson !important;
+  }
+
 }

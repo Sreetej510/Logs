@@ -1,7 +1,9 @@
-function openLog(id, name) {
+function openLog(id, name, toggle = true) {
     setTitle(name, id);
     setLogs(id);
-    toggleNav();
+    if (toggle) {
+        toggleNav();
+    }
     syncLogCache(id);
 }
 
@@ -17,8 +19,6 @@ function setTitle(name, id) {
     document.getElementById('infoModalContainer').setAttribute('eleid', id);
 }
 
-
-
 async function setLogs(id) {
     document.getElementById('allLogsContainer').setAttribute('eleid', id);
     await db.collection('/detailedLogs/' + id + '/logs').get().then((allDocs) => {
@@ -30,8 +30,7 @@ async function setLogs(id) {
 }
 
 
-
-//#region show docs from db start
+// show docs from db start
 function showDocs(docData, logID) {
     var div = document.createElement('div');
     div.setAttribute('class', 'logContainer');
@@ -46,26 +45,33 @@ function showDocs(docData, logID) {
             logTextHTML += '<div>' + ele + '</div>';
         }
         if (typeof ele == 'object') {
-            logTextHTML += '<ul>';
-            for (var i = 0; i < ele.ul.length; i++) {
-                logTextHTML += '<li>' + ele.ul[i] + '</li> ';
+            if ('ul' in ele) {
+                logTextHTML += '<ul>';
+                for (var i = 0; i < ele.ul.length; i++) {
+                    logTextHTML += '<li';
+                    if (ele.strike[i]) {
+                        logTextHTML += ' class="strikeThrough"';
+                    }
+                    logTextHTML += '>' + ele.ul[i] + '</li> ';
+                }
+                logTextHTML += '</ul>';
             }
-            logTextHTML += '</ul>';
+
         }
     })
 
     var saveHTML = '<button class="saveBtnMobile" onclick="save_deleteLog(\'' + logID + '\')"><svg x="0px" y="0px" viewBox="0 0 512 512" style="width: 24px;height: 24px;"><path d="M412.907,214.08C398.4,140.693,333.653,85.333,256,85.333c-61.653,0-115.093,34.987-141.867,86.08    C50.027,178.347,0,232.64,0,298.667c0,70.72,57.28,128,128,128h277.333C464.213,426.667,512,378.88,512,320    C512,263.68,468.16,218.027,412.907,214.08z M298.667,277.333v85.333h-85.333v-85.333h-64L256,170.667l106.667,106.667H298.667z"></path></svg ></button > '
 
-    div.innerHTML = titleLogHTML + logTextHTML + '</div > ' + saveHTML;
+    div.innerHTML = saveHTML + titleLogHTML + logTextHTML + '</div > ';
     assignQuerySelector(div);
     var continer = document.getElementById('allLogsContainer');
     continer.insertBefore(div, continer.firstChild);
 }
-//#endregion show docs from db
+// show docs from db end
 
 
 
-//#region keywords update
+// keywords update start
 document.getElementById('addKeywords').addEventListener('submit', function (e) {
     e.preventDefault();
     var keyword = document.getElementById('addKeywords')[0].value;
@@ -88,58 +94,90 @@ document.getElementById('addKeywords').addEventListener('submit', function (e) {
     db.collection('allLogs').doc(id).update('keywords', tempArr);
 
 })
-//#endregion keywords update
+// keywords update end
 
 
 
-//#region sync cache
+//sync cache start
 function syncLogCache(id) {
     db.collection('allLogs').doc(id.toString()).get()
     db.collection('detailedLogs').doc(id.toString()).collection('logs').get()
 }
-//#endregion sync cache
+// sync cache end
 
+
+// asignQuerySelector start
 var currentLog;
 
-function assignQuerySelector(item) {
-    item.addEventListener('keydown', function (e) {
+function assignQuerySelector(ele) {
+    ele.addEventListener('keydown', function (e) {
         if (e.key == 's' && e.ctrlKey == true) {
             e.preventDefault();
-            save_deleteLog(item.getAttribute('id'));
+            save_deleteLog(ele.getAttribute('id'));
         }
     });
 
-    item.children[0].addEventListener('keydown', function (e) {
+    ele.children[1].addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             e.preventDefault();
         }
     });
 
-    item.addEventListener('click', function (e) {
-        currentLog = item.getAttribute("id")
+
+    ele.children[2].addEventListener('keydown', function (e) {
+        setActiveElement(ele)
+    })
+    ele.children[2].addEventListener('click', function (e) {
+        setActiveElement(ele)
     })
 }
+// asignQuerySelector end
 
+
+function setActiveElement(ele) {
+    currentLog = ele.getAttribute("id")
+    try {
+        document.getElementById('active').removeAttribute('id');
+    } catch (error) { }
+
+    setTimeout(() => {
+        var activeEle = window.getSelection().getRangeAt(0).startContainer;
+
+        while (true) {
+            if (activeEle.tagName == 'DIV' || activeEle.tagName == 'UL') {
+                break;
+            }
+            activeEle = activeEle.parentNode;
+        }
+        activeEle.setAttribute('id', 'active');
+    }, 1);
+}
+
+
+// save or delete choose start
 function save_deleteLog(id) {
-    var item = document.getElementById(id);
-    if (item.textContent.trim() != '') {
-        saveLog(item);
+    var ele = document.getElementById(id);
+
+    if (ele.textContent.trim() != '') {
+        saveLog(ele);
     } else {
-        deleteLog(item);
+        deleteLog(ele);
     }
 }
+// save or delete choose end
+
 
 
 //save log start
-function saveLog(item) {
+function saveLog(ele) {
     var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
-    var logID = item.getAttribute('id');
-    var name = item.children[0].innerHTML;
+    var logID = ele.getAttribute('id');
+    var name = ele.children[1].innerHTML;
     var log = []
 
-    var textChildren = item.children[1].children;
+    var eleChildren = ele.children[2].children;
 
-    var notNestedText = item.children[1].firstChild;
+    var notNestedText = ele.children[2].firstChild;
     try {
 
         if (notNestedText.tagName == undefined) {
@@ -147,38 +185,40 @@ function saveLog(item) {
         }
     } catch (e) { }
 
-    for (let index = 0; index < textChildren.length; index++) {
-        var type = textChildren[index].tagName;
+    for (let index = 0; index < eleChildren.length; index++) {
+        var type = eleChildren[index].tagName;
         if (type == 'DIV') {
-            log.push(textChildren[index].innerHTML)
+            log.push(eleChildren[index].innerHTML)
         }
         if (type == 'UL') {
-            var tempEle = textChildren[index].children;
+            var tempEle = eleChildren[index].children;
             var tempArr = []
+            var tempStrike = []
             for (let i = 0; i < tempEle.length; i++) {
                 const element = tempEle[i];
                 tempArr.push(element.innerHTML);
+                tempStrike.push(element.classList.contains('strikeThrough'))
             }
-            log.push({ ul: tempArr });
+            log.push({ ul: tempArr, strike: tempStrike });
         }
+
     }
     db.collection('detailedLogs/' + eleID + '/logs').doc(logID).set({
         name: name,
         log: log
     })
-    db.collection('allLogs').doc(eleID).update({
-        lastEdit: firebase.firestore.Timestamp.now(),
-    })
+    updateLastEdit(eleID);
 }
 //save log end
 
 
 //delete log start
-function deleteLog(item) {
+function deleteLog(ele) {
     var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
-    var logID = item.getAttribute('id');
+    var logID = ele.getAttribute('id');
     db.collection('detailedLogs/' + eleID + '/logs').doc(logID).delete();
     document.getElementById('allLogsContainer').removeChild(document.getElementById(logID));
+    updateLastEdit(eleID);
 }
 //delete log end
 
@@ -218,6 +258,75 @@ function checkIdToDelete(ele) {
 }
 
 function addBullet() {
-    var ele = document.getElementById(currentLog);
-    ele.children[1].innerHTML += '<ul><li></li></ul>'
+    var activeEle = document.getElementById('active');
+    var ul = document.createElement('ul')
+    ul.innerHTML = '<li></li>'
+    activeEle.insertAdjacentElement("afterend", ul)
 }
+
+//checkbox trails
+
+// function addBox() {
+//     var activeEle = document.getElementById('active');
+//     var ol = document.createElement('ol')
+//     ol.contentEditable = false;
+//     ol.innerHTML = '<input type="checkbox"><span contenteditable="true"></span>'
+//     activeEle.insertAdjacentElement("afterend", ol)
+
+//     ol.lastChild.addEventListener('keydown', function (e) {
+//         if (e.keyCode == 8 || e.keyCode == 13 || e.keyCode == 46) {
+//             if (e.target.textContent == '') {
+//                 e.preventDefault()
+//                 document.getElementById('active').removeAttribute('id');
+//                 activeEle.insertAdjacentHTML("afterend", "<div id='active'></div>")
+//                 e.target.parentNode.remove();
+//                 var range = document.createRange()
+//                 var sel = window.getSelection()
+
+//                 var aEle = document.getElementById('active');
+//                 range.setStart(aEle, 0)
+//                 range.collapse(true)
+
+//                 sel.removeAllRanges()
+//                 sel.addRange(range)
+//                 document.getElementById('active').removeAttribute('id');
+//             }
+//         }
+//     })
+// }
+
+
+function updateLastEdit(id) {
+    db.collection('allLogs').doc(id).update({
+        lastEdit: firebase.firestore.Timestamp.now(),
+    })
+}
+
+var strikeThrough = false;
+
+function toggleStikeThrough(btn) {
+    btn.classList.toggle('stikeBtnActive')
+
+    var eleArr = document.getElementsByClassName('logContainer');
+
+    for (let index = 0; index < eleArr.length; index++) {
+        const element = eleArr[index];
+        element.classList.toggle('cursorForStrike')
+        element.children[2].setAttribute('contenteditable', strikeThrough)
+    }
+
+    if (!strikeThrough) {
+        strikeThrough = true;
+        window.onclick = e => {
+            if (e.target.tagName == 'LI') {
+                e.target.classList.toggle('strikeThrough')
+            }
+        }
+    } else {
+        strikeThrough = false;
+        window.onclick = undefined;
+    }
+
+}
+
+
