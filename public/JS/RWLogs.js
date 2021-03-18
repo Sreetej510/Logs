@@ -1,9 +1,6 @@
-function openLog(id, name, toggle = true) {
+function openLog(id, name) {
     setTitle(name, id);
     setLogs(id);
-    if (toggle) {
-        toggleNav();
-    }
     syncLogCache(id);
 }
 

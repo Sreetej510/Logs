@@ -1,4 +1,5 @@
 window.onload = async function () {
+    window.location.hash = 'main';
     getDocs();
     syncCache();
 }
@@ -39,23 +40,23 @@ function createCards(inputCards) {
         var lastEdit = obj['lastEdit']['seconds'];
         lastEdit = changeDate(lastEdit);
 
-        var htmlElement = createHTML(name, id, description, lastEdit, color);
+        var htmlElement = createCardHTML(name, id, description, lastEdit, color);
 
         cardContainer.appendChild(htmlElement);
 
         if (!clickedLog) {
             clickedLog = true;
-            openLog(id, name, false)
+            openLog(id, name)
         }
     });
 }
 
-function createHTML(name, id, description, lastEdit, color) {
+function createCardHTML(name, id, description, lastEdit, color) {
     var cardElement = document.createElement('div');
     cardElement.setAttribute('class', 'card mb-3 cusTheme-' + color);
     cardElement.setAttribute('id', id);
 
-    var aElement = '<a href="#" onclick="openLog(\'' + id + '\',\'' + name + '\')" ></a>'
+    var aElement = '<a href="#log" onclick="openLog(\'' + id + '\',\'' + name + '\')" ></a>'
 
 
     var headerElement = '<div class="card-body"><h5 class="font_Comic">' + name + '</h5> ';

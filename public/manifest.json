@@ -4,7 +4,7 @@
     "description": "My Logs App",
     "start_url": "/index.html",
     "display": "standalone",
-    "orientation": "any",
+    "orientation": "default",
     "lang": "English",
     "background_color":"#fff",
     "theme_color":"#fff",

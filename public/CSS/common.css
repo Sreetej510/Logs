@@ -115,7 +115,7 @@
   box-shadow: 0 1px 5px 0 rgb(0 0 0 / 18%);
 }
 
-#header > span{
+#header > span {
   font-size: 1.5rem;
 }
 
@@ -123,7 +123,8 @@
   display: inline-block;
 }
 
-#header button {
+#header button,
+#header a {
   width: 40px;
   height: 40px;
   border: none;
@@ -133,15 +134,19 @@
   outline: none;
 }
 
+#header a {
+  padding-left: 15px;
+}
+
 #header button:hover {
   background-color: #e5e5e5;
 }
 
-button{
+button {
   transition: scale 0.3s ease;
 }
 
-button:active{
+button:active {
   transform: scale(0.9);
 }
 
@@ -149,10 +154,10 @@ button:active{
   width: 24px;
   height: 24px;
   position: absolute;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
-#backBtn{
+#backBtn {
   display: none;
 }
 .saveBtnMobile {
@@ -172,7 +177,6 @@ button:active{
 }
 
 @media (max-width: 1000px) {
-
   #customNav,
   .navFooter {
     width: 100%;
@@ -180,11 +184,11 @@ button:active{
     position: fixed;
   }
 
-  #header > span{
+  #header > span {
     font-size: 1.3rem;
   }
 
-  .saveBtnMobile  {
+  .saveBtnMobile {
     position: absolute;
     right: 25px;
     background: none;
@@ -202,7 +206,7 @@ button:active{
     height: 100%;
   }
 
-  .logContainer{
+  .logContainer {
     padding: 30px 15px 15px 18px;
   }
 
@@ -215,29 +219,28 @@ button:active{
     padding: 7px 10px;
   }
 
-  #header button{
+  #header button {
     width: 25px;
     height: 25px;
   }
-  
+
   #header svg {
-  width: 15px;
-  height: 15px;
-  top: 50%;
+    width: 15px;
+    height: 15px;
+    top: 50%;
   }
 
-  #backBtn{
+  #backBtn {
     display: block;
   }
-  .logTitle{
+  .logTitle {
     transform: translateX(-15px);
-    font-size: 1.3rem;   
+    font-size: 1.3rem;
   }
 
-  .logContainer:focus-within > .saveBtnMobile{
+  .logContainer:focus-within > .saveBtnMobile {
     display: block;
   }
-
 }
 
 /* custom themes for cards */
@@ -303,13 +306,12 @@ button:active{
   button:hover {
     background-color: transparent !important;
   }
-  
-  .cursorForStrike li:hover{
-    cursor:default;
+
+  .cursorForStrike li:hover {
+    cursor: default;
   }
 
-  .stikeBtnActive:hover{
+  .stikeBtnActive:hover {
     background-color: crimson !important;
   }
-
 }
