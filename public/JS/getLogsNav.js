@@ -1,8 +1,8 @@
 window.onload = async function () {
-    if (window.localStorage.getItem('window') == "logs") {
+    if (window.sessionStorage.getItem('window') == "logs") {
         reload = false;
     }
-    window.localStorage.setItem('window', 'home');
+    window.sessionStorage.setItem('window', 'home');
     window.location.hash = Date.now();
     getDocs();
     syncCache();

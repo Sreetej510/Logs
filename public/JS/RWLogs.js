@@ -258,40 +258,12 @@ function addBullet() {
     var activeEle = document.getElementById('active');
     var ul = document.createElement('ul')
     ul.innerHTML = '<li></li>'
-    activeEle.insertAdjacentElement("afterend", ul)
+    if (activeEle.parentElement.classList.contains('logContainer')) {
+        activeEle.appendChild(ul);
+    } else {
+        activeEle.insertAdjacentElement("afterend", ul)
+    }
 }
-
-//checkbox trails
-
-// function addBox() {
-//     var activeEle = document.getElementById('active');
-//     var ol = document.createElement('ol')
-//     ol.contentEditable = false;
-//     ol.innerHTML = '<input type="checkbox"><span contenteditable="true"></span>'
-//     activeEle.insertAdjacentElement("afterend", ol)
-
-//     ol.lastChild.addEventListener('keydown', function (e) {
-//         if (e.keyCode == 8 || e.keyCode == 13 || e.keyCode == 46) {
-//             if (e.target.textContent == '') {
-//                 e.preventDefault()
-//                 document.getElementById('active').removeAttribute('id');
-//                 activeEle.insertAdjacentHTML("afterend", "<div id='active'></div>")
-//                 e.target.parentNode.remove();
-//                 var range = document.createRange()
-//                 var sel = window.getSelection()
-
-//                 var aEle = document.getElementById('active');
-//                 range.setStart(aEle, 0)
-//                 range.collapse(true)
-
-//                 sel.removeAllRanges()
-//                 sel.addRange(range)
-//                 document.getElementById('active').removeAttribute('id');
-//             }
-//         }
-//     })
-// }
-
 
 function updateLastEdit(id) {
     db.collection('allLogs').doc(id).update({

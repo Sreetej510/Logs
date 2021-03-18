@@ -134,10 +134,10 @@ function addNewLog() {
 function toggleNav() {
     document.getElementById('customNav').classList.toggle('inactive');
 
-    if (window.localStorage.getItem('window') == "logs") {
-        window.localStorage.setItem('window', 'home');
+    if (window.sessionStorage.getItem('window') == "logs") {
+        window.sessionStorage.setItem('window', 'home');
     } else {
-        window.localStorage.setItem('window', 'logs');
+        window.sessionStorage.setItem('window', 'logs');
     }
 
 }

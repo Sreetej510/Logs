@@ -44,7 +44,7 @@ small {
 }
 
 #addModalContainer > :last-child,
-#infoModalContainer > :first-child ,
+#infoModalContainer > :first-child,
 #deleteModalContainer > :first-child {
   left: 0;
   position: absolute;
@@ -110,10 +110,10 @@ option > div {
   padding: 10px;
 }
 
-.deleteModal{
+.deleteModal {
   z-index: 100;
   width: 350px;
-  padding:25px 40px;
+  padding: 25px 40px;
   margin: auto;
   margin-top: 100px;
   border-radius: 10px;
@@ -122,7 +122,7 @@ option > div {
   transform: translateY(-100%);
 }
 
-.deleteModal > *{
+.deleteModal > * {
   margin: 10px 0;
 }
 
@@ -130,14 +130,13 @@ option > div {
   transform: translateY(0) !important;
 }
 
-
 #MainPage {
   position: relative;
   width: calc(100% - 450px);
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
-  margin-top: 50px;
+  margin-top: 50px !important;
   height: 100%;
   overflow-y: scroll;
 }
@@ -150,43 +149,42 @@ option > div {
   color: #454545;
 }
 
-
 .logContainer {
   padding: 50px 50px;
   width: 100%;
   border-bottom: #4e40404f dashed 2px;
 }
-.logContainer  * {
+.logContainer * {
   outline: none;
   min-height: 10px;
 }
 
-.logContainer ul{
+.logContainer ul {
   margin: 0;
   padding-left: 1rem;
 }
 
-.logContainer ol{
+.logContainer ol {
   margin: 0;
   padding-left: 0;
 }
 
-.logTitle{
+.logTitle {
   color: black;
   transform: translateX(-25px);
 }
 
-.strikeThrough{
+.strikeThrough {
   text-decoration: line-through;
   color: gray;
 }
 
-.cursorForStrike li:hover{
-  cursor:default;
+.cursorForStrike li:hover {
+  cursor: default;
   background-color: #b6b6b64f;
 }
 
-.stikeBtnActive{
+.stikeBtnActive {
   background-color: crimson !important;
   fill: white;
 }
