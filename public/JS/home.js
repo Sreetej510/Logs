@@ -133,8 +133,25 @@ function addNewLog() {
 
 function toggleNav() {
     document.getElementById('customNav').classList.toggle('inactive');
+
+    if (window.localStorage.getItem('window') == "logs") {
+        window.localStorage.setItem('window', 'home');
+    } else {
+        window.localStorage.setItem('window', 'logs');
+    }
+
 }
 
+var reload = true;
+
 window.addEventListener("hashchange", function (e) {
-    toggleNav();
+    if (!reload) {
+        toggleNav();
+    } else {
+        reload = false;
+    }
 })
+
+function goBack() {
+    window.history.back();
+}

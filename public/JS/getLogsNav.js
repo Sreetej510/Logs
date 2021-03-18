@@ -1,7 +1,12 @@
 window.onload = async function () {
-    window.location.hash = 'main';
+    if (window.localStorage.getItem('window') == "logs") {
+        reload = false;
+    }
+    window.localStorage.setItem('window', 'home');
+    window.location.hash = Date.now();
     getDocs();
     syncCache();
+
 }
 
 var cards = [];
@@ -113,7 +118,6 @@ function changeDate(dateTimeParam) {
             time = time + ' mins ago';
         }
     }
-
     return time;
 }
 

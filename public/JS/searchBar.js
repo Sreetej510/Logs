@@ -16,15 +16,19 @@ function searchChange(e) {
 
 document.getElementById('searchBar').addEventListener('submit', function (event) {
     event.preventDefault();
-    search();
+    var searchText = document.getElementById('searchInput').value;
+    searchText = searchText.trim().toLowerCase();
+    if (searchText != '') {
+        console.log(searchText)
+        search(searchText);
+    }
 });
 
 
 
-async function search() {
+async function search(searchText) {
     var searchCards = []
-    var searchText = document.getElementById('searchInput').value;
-    searchText = searchText.trim().toLowerCase();
+
 
     await cards.forEach(ele => {
         var keywords = ele.keywords;
