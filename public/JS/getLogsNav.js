@@ -1,8 +1,10 @@
+var windowLoc = 'home';
+
 window.onload = async function () {
-    if (window.sessionStorage.getItem('window') == "logs") {
+    if (windowLoc == "logs") {
         reload = false;
     }
-    window.sessionStorage.setItem('window', 'home');
+    windowLoc = 'home';
     window.location.hash = Date.now();
     getDocs();
     syncCache();
