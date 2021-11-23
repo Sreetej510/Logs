@@ -7,10 +7,9 @@ function openLog(id, name) {
 function setTitle(name, id) {
     document.getElementById('Title').innerHTML = name;
     var keywords;
-    db.collection('allLogs').doc(id).get({ source: 'cache' }).then((doc) => {
+    db.collection(user_id + "/allLogs/allLogs").doc(id).get({ source: 'cache' }).then((doc) => {
         keywords = doc.data().keywords;
         var tempString = keywords.join(',   ');
-
         document.getElementById('keywords').innerHTML = tempString;
     });
     document.getElementById('infoModalContainer').setAttribute('eleid', id);
@@ -18,14 +17,13 @@ function setTitle(name, id) {
 
 async function setLogs(id) {
     document.getElementById('allLogsContainer').setAttribute('eleid', id);
-    await db.collection('/detailedLogs/' + id + '/logs').get().then((allDocs) => {
+    await db.collection(user_id + '/detailedLogs/' + id).get().then((allDocs) => {
         document.getElementById('allLogsContainer').innerHTML = '';
         allDocs.forEach((doc) => {
             showDocs(doc.data(), doc.id);
         })
     })
 }
-
 
 // show docs from db start
 function showDocs(docData, logID) {
@@ -66,8 +64,6 @@ function showDocs(docData, logID) {
 }
 // show docs from db end
 
-
-
 // keywords update start
 document.getElementById('addKeywords').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -88,20 +84,17 @@ document.getElementById('addKeywords').addEventListener('submit', function (e) {
 
     var id = document.getElementById('infoModalContainer').getAttribute('eleid');
 
-    db.collection('allLogs').doc(id).update('keywords', tempArr);
+    db.collection(user_id + "/allLogs/allLogs").doc(id).update('keywords', tempArr);
 
 })
 // keywords update end
 
-
-
 //sync cache start
 function syncLogCache(id) {
-    db.collection('allLogs').doc(id.toString()).get()
-    db.collection('detailedLogs').doc(id.toString()).collection('logs').get()
+    db.collection(user_id + "/allLogs/allLogs").doc(id.toString()).get()
+    db.collection(user_id + '/detailedLogs/' + id.toString()).get()
 }
 // sync cache end
-
 
 // asignQuerySelector start
 var currentLog;
@@ -150,7 +143,6 @@ function setActiveElement(ele) {
     }, 1);
 }
 
-
 // save or delete choose start
 function save_deleteLog(id) {
     var ele = document.getElementById(id);
@@ -162,8 +154,6 @@ function save_deleteLog(id) {
     }
 }
 // save or delete choose end
-
-
 
 //save log start
 function saveLog(ele) {
@@ -200,7 +190,7 @@ function saveLog(ele) {
         }
 
     }
-    db.collection('detailedLogs/' + eleID + '/logs').doc(logID).set({
+    db.collection(user_id +  '/detailedLogs/' + eleID).doc(logID).set({
         name: name,
         log: log
     })
@@ -213,12 +203,12 @@ function saveLog(ele) {
 function deleteLog(ele) {
     var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
     var logID = ele.getAttribute('id');
-    db.collection('detailedLogs/' + eleID + '/logs').doc(logID).delete();
+    db.collection(user_id + '/detailedLogs/' + eleID).doc(logID).delete();
     document.getElementById('allLogsContainer').removeChild(document.getElementById(logID));
     updateLastEdit(eleID);
 }
-//delete log end
 
+//delete log end
 function deleteTotalToggle() {
     var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
     document.getElementById('deleteModal').children[2].value = '';
@@ -234,13 +224,13 @@ function deleteTotalToggle() {
 
 function deleteTotalLog() {
     var eleID = document.getElementById('allLogsContainer').getAttribute('eleid');
-    db.collection('allLogs').doc(eleID).delete();
-    db.collection('detailedLogs/' + eleID + '/logs').get().then((snapshot) => {
+    db.collection(user_id + "/allLogs/allLogs").doc(eleID).delete();
+    db.collection(user_id +  '/detailedLogs/' + eleID).get().then((snapshot) => {
         snapshot.forEach((doc) => {
-            db.collection('detailedLogs/' + eleID + '/logs').doc(doc.id).delete();
+            db.collection(user_id + '/detailedLogs/' + eleID).doc(doc.id).delete();
         })
     });
-    db.collection('detailedLogs').doc(eleID).delete();
+    db.collection(user_id + '/detailedLogs').doc(eleID).delete();
     document.getElementById(eleID).remove();
     deleteTotalToggle();
 }
@@ -266,7 +256,7 @@ function addBullet() {
 }
 
 function updateLastEdit(id) {
-    db.collection('allLogs').doc(id).update({
+    db.collection(user_id + "/allLogs/allLogs").doc(id).update({
         lastEdit: firebase.firestore.Timestamp.now(),
     })
 }
@@ -295,7 +285,4 @@ function toggleStikeThrough(btn) {
         strikeThrough = false;
         window.onclick = undefined;
     }
-
 }
-
-

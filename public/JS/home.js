@@ -31,14 +31,14 @@ document.getElementById('CreateLogForm').addEventListener('submit', function (e)
         keywords: keywords,
     }
 
-    db.collection('allLogs').doc(id).set(obj);
+    db.collection(user_id + "/allLogs/allLogs").doc(id).set(obj);
 
     addModalToggle();
 
     cards.push(obj);
     createCards(cards);
 
-    db.collection('detailedLogs/' + id + '/logs').doc(Date.now().toString()).set({
+    db.collection(user_id + '/detailedLogs/' + id).doc(Date.now().toString()).set({
         name: 'Title Here',
         log: ['Text goes Here']
     });

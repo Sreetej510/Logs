@@ -8,13 +8,12 @@ window.onload = async function () {
     window.location.hash = Date.now();
     getDocs();
     syncCache();
-
 }
 
 var cards = [];
 
 function getDocs(src = "cache") {
-    db.collection("allLogs").get({ source: src }).then((snapshot) => {
+    db.collection(user_id + "/allLogs/allLogs").get({ source: src }).then((snapshot) => {
         retrieve(snapshot.docs);
     }).catch((e) => {
         getDocs("server");
@@ -124,5 +123,5 @@ function changeDate(dateTimeParam) {
 }
 
 function syncCache() {
-    db.collection("allLogs").get({ source: "server" });
+    db.collection(user_id + "/allLogs/allLogs").get({ source: "server" });
 }

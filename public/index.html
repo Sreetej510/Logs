@@ -1,262 +1,282 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="stylesheet" href="CSS/bootstrap.css" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Roboto&display=swap" rel="stylesheet" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="CSS/bootstrap.css" />
 
-    <link rel="stylesheet" href="CSS/home.css" />
-    <link rel="stylesheet" href="CSS/common.css" />
-    <link rel="stylesheet" href="CSS/searchBar.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Roboto&display=swap"
+    rel="stylesheet" />
 
-    <link rel="icon" href="Images/log.svg" />
+  <link rel="stylesheet" href="CSS/home.css" />
+  <link rel="stylesheet" href="CSS/common.css" />
+  <link rel="stylesheet" href="CSS/searchBar.css" />
 
-    <title>Ωmega Logs</title>
-  </head>
+  <link rel="icon" href="Images/log.svg" />
 
-  <body>
-    <style id="scrollStyleMainPage">
-      #MainPage::-webkit-scrollbar-thumb {
-        background-color: #0000;
-      }
-    </style>
-    <style id="scrollStyleNav">
-      #cardContainer::-webkit-scrollbar-thumb {
-        background-color: #0000;
-      }
-    </style>
-    <div class="container-fluid">
-      <div class="row row-height" id="mainContainer">
-        <!-- Navigation -->
-        <div class="border-right border-3" id="customNav">
-          <!-- Search Bar -->
+  <title>Ωmega Logs</title>
+</head>
 
-          <div class="searchBarContainer" id="searchBarContainer">
-            <form class="searchBar row" id="searchBar">
-              <button type="submit" class="enterSearchBtn">
-                <svg class="enterSearch">
-                  <path
-                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l
-                    5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-                  ></path>
-                </svg>
-              </button>
+<body>
+  <style id="scrollStyleMainPage">
+    #MainPage::-webkit-scrollbar-thumb {
+      background-color: #0000;
+    }
+  </style>
+  <style id="scrollStyleNav">
+    #cardContainer::-webkit-scrollbar-thumb {
+      background-color: #0000;
+    }
+  </style>
+  <div class="container-fluid">
+    <div class="row row-height" id="mainContainer">
+      <!-- Navigation -->
+      <div class="border-right border-3" id="customNav">
+        <!-- Search Bar -->
 
-              <input type="text" placeholder="Search of Log" id="searchInput" oninput="searchChange(this)" class="col" />
-
-              <button type="button" onclick="searchClear()" class="clearSearchBtn" id="clearSearchBtn" style="display: none">
-                <svg class="clearSearch">
-                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                </svg>
-              </button>
-            </form>
-          </div>
-
-          <!-- Navigation Cards -->
-          <div id="cardContainer"> </div>
-
-          <!-- Nav Footer -->
-          <div class="navFooter d-flex justify-content-around border-right border-top border-3">
-            <form id="accessTokenForm">
-              <input placeholder="Acess Token" value="dx92m09r38dg3567088b12a5c2d1502" id="accessToken" />
-            </form>
-
-            <button onclick="addModalToggle()">
-              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false"><path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path></svg>
+        <div class="searchBarContainer" id="searchBarContainer">
+          <form class="searchBar row" id="searchBar">
+            <button type="submit" class="enterSearchBtn">
+              <svg class="enterSearch">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l
+                    5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                </path>
+              </svg>
             </button>
 
-            <button onclick="displayAcessToken()">
-              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+            <input type="text" placeholder="Search of Log" id="searchInput" oninput="searchChange(this)" class="col" />
+
+            <button type="button" onclick="searchClear()" class="clearSearchBtn" id="clearSearchBtn"
+              style="display: none">
+              <svg class="clearSearch">
                 <path
-                  d="M13.85 22.25h-3.7c-.74 0-1.36-.54-1.45-1.27l-.27-1.89c-.27-.14-.53-.29-.79-.46l-1.8.72c-.7.26-1.47-.03-1.81-.65L2.2 15.53c-.35-.66-.2-1.44.36-1.88l1.53-1.19c-.01-.15-.02-.3-.02-.46 0-.15.01-.31.02-.46l-1.52-1.19c-.59-.45-.74-1.26-.37-1.88l1.85-3.19c.34-.62 1.11-.9 1.79-.63l1.81.73c.26-.17.52-.32.78-.46l.27-1.91c.09-.7.71-1.25 1.44-1.25h3.7c.74 0 1.36.54 1.45 1.27l.27 1.89c.27.14.53.29.79.46l1.8-.72c.71-.26 1.48.03 1.82.65l1.84 3.18c.36.66.2 1.44-.36 1.88l-1.52 1.19c.01.15.02.3.02.46s-.01.31-.02.46l1.52 1.19c.56.45.72 1.23.37 1.86l-1.86 3.22c-.34.62-1.11.9-1.8.63l-1.8-.72c-.26.17-.52.32-.78.46l-.27 1.91c-.1.68-.72 1.22-1.46 1.22zm-3.23-2h2.76l.37-2.55.53-.22c.44-.18.88-.44 1.34-.78l.45-.34 2.38.96 1.38-2.4-2.03-1.58.07-.56c.03-.26.06-.51.06-.78s-.03-.53-.06-.78l-.07-.56 2.03-1.58-1.39-2.4-2.39.96-.45-.35c-.42-.32-.87-.58-1.33-.77l-.52-.22-.37-2.55h-2.76l-.37 2.55-.53.21c-.44.19-.88.44-1.34.79l-.45.33-2.38-.95-1.39 2.39 2.03 1.58-.07.56a7 7 0 0 0-.06.79c0 .26.02.53.06.78l.07.56-2.03 1.58 1.38 2.4 2.39-.96.45.35c.43.33.86.58 1.33.77l.53.22.38 2.55z"
-                ></path>
-                <circle cx="12" cy="12" r="3.5"></circle>
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                </path>
+                <path d="M0 0h24v24H0z" fill="none"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Navigation Cards -->
+        <div id="cardContainer"> </div>
+
+        <!-- Nav Footer -->
+        <div class="navFooter d-flex justify-content-around border-right border-top border-3">
+          <form id="accessTokenForm">
+            <input placeholder="Acess Token" value="dx92m09r38dg3567088b12a5c2d1502" id="accessToken" />
+          </form>
+
+          <button onclick="addModalToggle()">
+            <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+              <path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path>
+            </svg>
+          </button>
+
+          <button onclick="displayAcessToken()">
+            <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+              <path
+                d="M13.85 22.25h-3.7c-.74 0-1.36-.54-1.45-1.27l-.27-1.89c-.27-.14-.53-.29-.79-.46l-1.8.72c-.7.26-1.47-.03-1.81-.65L2.2 15.53c-.35-.66-.2-1.44.36-1.88l1.53-1.19c-.01-.15-.02-.3-.02-.46 0-.15.01-.31.02-.46l-1.52-1.19c-.59-.45-.74-1.26-.37-1.88l1.85-3.19c.34-.62 1.11-.9 1.79-.63l1.81.73c.26-.17.52-.32.78-.46l.27-1.91c.09-.7.71-1.25 1.44-1.25h3.7c.74 0 1.36.54 1.45 1.27l.27 1.89c.27.14.53.29.79.46l1.8-.72c.71-.26 1.48.03 1.82.65l1.84 3.18c.36.66.2 1.44-.36 1.88l-1.52 1.19c.01.15.02.3.02.46s-.01.31-.02.46l1.52 1.19c.56.45.72 1.23.37 1.86l-1.86 3.22c-.34.62-1.11.9-1.8.63l-1.8-.72c-.26.17-.52.32-.78.46l-.27 1.91c-.1.68-.72 1.22-1.46 1.22zm-3.23-2h2.76l.37-2.55.53-.22c.44-.18.88-.44 1.34-.78l.45-.34 2.38.96 1.38-2.4-2.03-1.58.07-.56c.03-.26.06-.51.06-.78s-.03-.53-.06-.78l-.07-.56 2.03-1.58-1.39-2.4-2.39.96-.45-.35c-.42-.32-.87-.58-1.33-.77l-.52-.22-.37-2.55h-2.76l-.37 2.55-.53.21c-.44.19-.88.44-1.34.79l-.45.33-2.38-.95-1.39 2.39 2.03 1.58-.07.56a7 7 0 0 0-.06.79c0 .26.02.53.06.78l.07.56-2.03 1.58 1.38 2.4 2.39-.96.45.35c.43.33.86.58 1.33.77l.53.22.38 2.55z">
+              </path>
+              <circle cx="12" cy="12" r="3.5"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Page -->
+      <div class="right" id="MainPage">
+        <!-- header -->
+        <header id="header">
+          <div class="headerBtns" id="backBtn">
+            <button onclick="goBack()">
+              <svg x="0px" y="0px" viewBox="0 0 55.753 55.753">
+                <path
+                  d="M12.745,23.915c0.283-0.282,0.59-0.52,0.913-0.727L35.266,1.581c2.108-2.107,5.528-2.108,7.637,0.001   c2.109,2.108,2.109,5.527,0,7.637L24.294,27.828l18.705,18.706c2.109,2.108,2.109,5.526,0,7.637   c-1.055,1.056-2.438,1.582-3.818,1.582s-2.764-0.526-3.818-1.582L13.658,32.464c-0.323-0.207-0.632-0.445-0.913-0.727   c-1.078-1.078-1.598-2.498-1.572-3.911C11.147,26.413,11.667,24.994,12.745,23.915z" />
               </svg>
             </button>
           </div>
-        </div>
+          <span id="Title" class="px-md-5 px-2 font_Comic">Logs</span>
+          <div class="headerBtns">
+            <button onclick="addNewLog()">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path>
+              </svg>
+            </button>
 
-        <!-- Main Page -->
-        <div class="right" id="MainPage">
-          <!-- header -->
-          <header id="header">
-            <div class="headerBtns" id="backBtn">
-              <button onclick="goBack()">
-                <svg x="0px" y="0px" viewBox="0 0 55.753 55.753">
-                  <path
-                    d="M12.745,23.915c0.283-0.282,0.59-0.52,0.913-0.727L35.266,1.581c2.108-2.107,5.528-2.108,7.637,0.001   c2.109,2.108,2.109,5.527,0,7.637L24.294,27.828l18.705,18.706c2.109,2.108,2.109,5.526,0,7.637   c-1.055,1.056-2.438,1.582-3.818,1.582s-2.764-0.526-3.818-1.582L13.658,32.464c-0.323-0.207-0.632-0.445-0.913-0.727   c-1.078-1.078-1.598-2.498-1.572-3.911C11.147,26.413,11.667,24.994,12.745,23.915z"
-                  />
-                </svg>
-              </button>
-            </div>
-            <span id="Title" class="px-md-5 px-2 font_Comic">Logs</span>
-            <div class="headerBtns">
-              <button onclick="addNewLog()">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M20 13h-7v7h-2v-7H4v-2h7V4h2v7h7v2z"></path>
-                </svg>
-              </button>
-
-              <button onclick="addBullet()">
-                <svg x="0px" y="0px" viewBox="0 0 612 612">
-                  <path
-                    d="M63.311,73.862C28.342,73.862,0,102.204,0,137.172s28.342,63.311,63.311,63.311c34.968,0,63.31-28.342,63.31-63.311     S98.279,73.862,63.311,73.862z M63.311,242.689C28.342,242.689,0,271.032,0,306c0,34.969,28.342,63.311,63.311,63.311     c34.968,0,63.31-28.342,63.31-63.311C126.621,271.032,98.279,242.689,63.311,242.689z M63.311,411.518 
+            <button onclick="addBullet()">
+              <svg x="0px" y="0px" viewBox="0 0 612 612">
+                <path
+                  d="M63.311,73.862C28.342,73.862,0,102.204,0,137.172s28.342,63.311,63.311,63.311c34.968,0,63.31-28.342,63.31-63.311     S98.279,73.862,63.311,73.862z M63.311,242.689C28.342,242.689,0,271.032,0,306c0,34.969,28.342,63.311,63.311,63.311     c34.968,0,63.31-28.342,63.31-63.311C126.621,271.032,98.279,242.689,63.311,242.689z M63.311,411.518 
                         C28.342,411.518,0,439.859,0,474.827c0,34.969,28.342,63.311,63.311,63.311c34.968,0,63.31-28.342,63.31-63.311     C126.621,439.859,98.279,411.518,63.311,411.518z M232.138,179.379h337.655c23.319,0,42.207-18.888,42.207-42.207     s-18.888-42.207-42.207-42.207H232.138c-23.319,0-42.207,18.888-42.207,42.207S208.819,179.379,232.138,179.379z    
-                          M569.793,263.793H232.138c-23.319,0-42.207,18.888-42.207,42.207s18.888,42.207,42.207,42.207h337.655     C593.112,348.207,612,329.319,612,306S593.112,263.793,569.793,263.793z M569.793,432.621H232.138     c-23.319,0-42.207,18.887-42.207,42.206s18.888,42.207,42.207,42.207h337.655c23.319,0,42.207-18.888,42.207-42.207     S593.112,432.621,569.793,432.621z"
-                  />
-                </svg>
-              </button>
+                          M569.793,263.793H232.138c-23.319,0-42.207,18.888-42.207,42.207s18.888,42.207,42.207,42.207h337.655     C593.112,348.207,612,329.319,612,306S593.112,263.793,569.793,263.793z M569.793,432.621H232.138     c-23.319,0-42.207,18.887-42.207,42.206s18.888,42.207,42.207,42.207h337.655c23.319,0,42.207-18.888,42.207-42.207     S593.112,432.621,569.793,432.621z" />
+              </svg>
+            </button>
 
-              <button onclick=" toggleStikeThrough(this)">
-                <svg viewBox="0 0 537.643 537.643">
-                  <path
-                    d="M399.768,239.341c-24.479-12.105-60.643-23.837-108.771-35.202c-51.035-12.051-83.17-23.624-96.402-34.731    c-10.404-8.739-15.594-19.253-15.594-31.542c0-13.47,5.544-24.217,16.658-32.253c17.247-12.521,41.114-18.782,71.592-18.782    c29.529,0,51.69,5.851,66.458,17.54c14.761,11.702,24.388,30.9,28.88,57.595l104.909-4.608    c-1.658-47.724-18.96-85.882-51.928-114.475C382.62,14.296,333.525,0,268.316,0c-39.933,0-74.015,6.022-102.253,18.073    c-28.231,12.05-49.847,29.59-64.848,52.632c-15.006,23.029-22.509,47.791-22.509,74.248c0,36.365,12.503,67.828,37.46,94.389    H399.768L399.768,239.341z"
-                  />
-                  <path
-                    d="M351.775,427.592c-17.13,14.303-42.59,21.445-76.372,21.445c-31.897,0-57.234-8.029-76.029-24.102    c-18.776-16.064-31.242-41.23-37.387-75.49l-102.069,9.928c6.848,58.121,27.876,102.369,63.085,132.725    c35.202,30.361,85.643,45.545,151.335,45.545c45.129,0,82.81-6.322,113.061-18.961c30.239-12.643,53.63-31.951,70.172-57.949    c16.536-25.986,24.811-53.869,24.811-83.643c0-22.582-3.348-42.619-9.884-60.232H306.529c9.97,2.766,17.467,5.012,22.388,6.713    c17.95,6.377,30.538,13.881,37.742,22.504c7.209,8.629,10.813,19.088,10.813,31.371    C377.473,396.582,368.911,413.297,351.775,427.592z"
-                  />
-                  <path
-                    d="M28.101,298.498h207.486h228.41h45.545c10.142,0,18.36-8.221,18.36-18.361v-4.082c0-10.141-8.219-18.36-18.36-18.36    h-80.453H136.89H28.101c-10.141,0-18.36,8.219-18.36,18.36v4.082C9.74,290.277,17.959,298.498,28.101,298.498z"
-                  />
-                </svg>
-              </button>
+            <button onclick=" toggleStikeThrough(this)">
+              <svg viewBox="0 0 537.643 537.643">
+                <path
+                  d="M399.768,239.341c-24.479-12.105-60.643-23.837-108.771-35.202c-51.035-12.051-83.17-23.624-96.402-34.731    c-10.404-8.739-15.594-19.253-15.594-31.542c0-13.47,5.544-24.217,16.658-32.253c17.247-12.521,41.114-18.782,71.592-18.782    c29.529,0,51.69,5.851,66.458,17.54c14.761,11.702,24.388,30.9,28.88,57.595l104.909-4.608    c-1.658-47.724-18.96-85.882-51.928-114.475C382.62,14.296,333.525,0,268.316,0c-39.933,0-74.015,6.022-102.253,18.073    c-28.231,12.05-49.847,29.59-64.848,52.632c-15.006,23.029-22.509,47.791-22.509,74.248c0,36.365,12.503,67.828,37.46,94.389    H399.768L399.768,239.341z" />
+                <path
+                  d="M351.775,427.592c-17.13,14.303-42.59,21.445-76.372,21.445c-31.897,0-57.234-8.029-76.029-24.102    c-18.776-16.064-31.242-41.23-37.387-75.49l-102.069,9.928c6.848,58.121,27.876,102.369,63.085,132.725    c35.202,30.361,85.643,45.545,151.335,45.545c45.129,0,82.81-6.322,113.061-18.961c30.239-12.643,53.63-31.951,70.172-57.949    c16.536-25.986,24.811-53.869,24.811-83.643c0-22.582-3.348-42.619-9.884-60.232H306.529c9.97,2.766,17.467,5.012,22.388,6.713    c17.95,6.377,30.538,13.881,37.742,22.504c7.209,8.629,10.813,19.088,10.813,31.371    C377.473,396.582,368.911,413.297,351.775,427.592z" />
+                <path
+                  d="M28.101,298.498h207.486h228.41h45.545c10.142,0,18.36-8.221,18.36-18.361v-4.082c0-10.141-8.219-18.36-18.36-18.36    h-80.453H136.89H28.101c-10.141,0-18.36,8.219-18.36,18.36v4.082C9.74,290.277,17.959,298.498,28.101,298.498z" />
+              </svg>
+            </button>
 
-              <button onclick="infoModalToggle()">
-                <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
-                  <path
-                    d="M13.85 22.25h-3.7c-.74 0-1.36-.54-1.45-1.27l-.27-1.89c-.27-.14-.53-.29-.79-.46l-1.8.72c-.7.26-1.47-.03-1.81-.65L2.2 15.53c-.35-.66-.2-1.44.36-1.88l1.53-1.19c-.01-.15-.02-.3-.02-.46 0-.15.01-.31.02-.46l-1.52-1.19c-.59-.45-.74-1.26-.37-1.88l1.85-3.19c.34-.62 1.11-.9 1.79-.63l1.81.73c.26-.17.52-.32.78-.46l.27-1.91c.09-.7.71-1.25 1.44-1.25h3.7c.74 0 1.36.54 1.45 1.27l.27 1.89c.27.14.53.29.79.46l1.8-.72c.71-.26 1.48.03 1.82.65l1.84 3.18c.36.66.2 1.44-.36 1.88l-1.52 1.19c.01.15.02.3.02.46s-.01.31-.02.46l1.52 1.19c.56.45.72 1.23.37 1.86l-1.86 3.22c-.34.62-1.11.9-1.8.63l-1.8-.72c-.26.17-.52.32-.78.46l-.27 1.91c-.1.68-.72 1.22-1.46 1.22zm-3.23-2h2.76l.37-2.55.53-.22c.44-.18.88-.44 1.34-.78l.45-.34 2.38.96 1.38-2.4-2.03-1.58.07-.56c.03-.26.06-.51.06-.78s-.03-.53-.06-.78l-.07-.56 2.03-1.58-1.39-2.4-2.39.96-.45-.35c-.42-.32-.87-.58-1.33-.77l-.52-.22-.37-2.55h-2.76l-.37 2.55-.53.21c-.44.19-.88.44-1.34.79l-.45.33-2.38-.95-1.39 2.39 2.03 1.58-.07.56a7 7 0 0 0-.06.79c0 .26.02.53.06.78l.07.56-2.03 1.58 1.38 2.4 2.39-.96.45.35c.43.33.86.58 1.33.77l.53.22.38 2.55z"
-                  ></path>
-                  <circle cx="12" cy="12" r="3.5"></circle>
-                </svg>
-              </button>
+            <button onclick="infoModalToggle()">
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+                <path
+                  d="M13.85 22.25h-3.7c-.74 0-1.36-.54-1.45-1.27l-.27-1.89c-.27-.14-.53-.29-.79-.46l-1.8.72c-.7.26-1.47-.03-1.81-.65L2.2 15.53c-.35-.66-.2-1.44.36-1.88l1.53-1.19c-.01-.15-.02-.3-.02-.46 0-.15.01-.31.02-.46l-1.52-1.19c-.59-.45-.74-1.26-.37-1.88l1.85-3.19c.34-.62 1.11-.9 1.79-.63l1.81.73c.26-.17.52-.32.78-.46l.27-1.91c.09-.7.71-1.25 1.44-1.25h3.7c.74 0 1.36.54 1.45 1.27l.27 1.89c.27.14.53.29.79.46l1.8-.72c.71-.26 1.48.03 1.82.65l1.84 3.18c.36.66.2 1.44-.36 1.88l-1.52 1.19c.01.15.02.3.02.46s-.01.31-.02.46l1.52 1.19c.56.45.72 1.23.37 1.86l-1.86 3.22c-.34.62-1.11.9-1.8.63l-1.8-.72c-.26.17-.52.32-.78.46l-.27 1.91c-.1.68-.72 1.22-1.46 1.22zm-3.23-2h2.76l.37-2.55.53-.22c.44-.18.88-.44 1.34-.78l.45-.34 2.38.96 1.38-2.4-2.03-1.58.07-.56c.03-.26.06-.51.06-.78s-.03-.53-.06-.78l-.07-.56 2.03-1.58-1.39-2.4-2.39.96-.45-.35c-.42-.32-.87-.58-1.33-.77l-.52-.22-.37-2.55h-2.76l-.37 2.55-.53.21c-.44.19-.88.44-1.34.79l-.45.33-2.38-.95-1.39 2.39 2.03 1.58-.07.56a7 7 0 0 0-.06.79c0 .26.02.53.06.78l.07.56-2.03 1.58 1.38 2.4 2.39-.96.45.35c.43.33.86.58 1.33.77l.53.22.38 2.55z">
+                </path>
+                <circle cx="12" cy="12" r="3.5"></circle>
+              </svg>
+            </button>
 
-              <button onclick="deleteTotalToggle()">
-                <svg viewBox="0 0 384 384">
-                  <path d="M64,341.333C64,364.907,83.093,384,106.667,384h170.667C300.907,384,320,364.907,320,341.333v-256H64V341.333z" />
-                  <polygon points="266.667,21.333 245.333,0 138.667,0 117.333,21.333 42.667,21.333 42.667,64 341.333,64 341.333,21.333 			" />
-                </svg>
-              </button>
-            </div>
-          </header>
-
-          <!-- logs content -->
-          <div id="allLogsContainer" class="font_Comic"> </div>
-        </div>
-      </div>
-
-      <!-- Add Modal -->
-      <div id="addModalContainer">
-        <div class="modalMain px-md-5" id="modalMain">
-          <div class="container px-md-5 py-4 font_Comic">
-            <div class="h4 text-center border-bottom mt-3">New Log</div>
-            <form class="container p-4" id="CreateLogForm">
-              <input class="col mb-3 form-control" name="logName" placeholder="Log Name" maxlength="15" required />
-
-              <textarea name="description" class="col mb-2 form-control" rows="2" placeholder="Description" maxlength="150" required></textarea>
-
-              <div class="form-group mb-2 d-flex">
-                <label class="mr-3 col-form-label">Color : </label>
-                <select id="newLogColor" class="col">
-                  <option value="">None</option>
-                  <option value="darkcyan" class="cusTheme-darkcyan">Dark Cyan</option>
-                  <option value="darkorchid" class="cusTheme-darkorchid">Dark Orchid</option>
-                  <option value="darkturquoise" class="cusTheme-darkturquoise">Dark Turquoise</option>
-                  <option value="deeppink" class="cusTheme-deeppink">Deep Pink</option>
-                  <option value="deepskyblue" class="cusTheme-deepskyblue">Deep Skyblue</option>
-                  <option value="forestgreen" class="cusTheme-forestgreen">Forest Green</option>
-                  <option value="goldenrod" class="cusTheme-goldenrod">Golden</option>
-                  <option value="indigo" class="cusTheme-indigo">Indigo</option>
-                  <option value="mediumseagreen" class="cusTheme-mediumseagreen">Sea Green</option>
-                  <option value="orange" class="cusTheme-orange">Orange</option>
-                  <option value="royalblue" class="cusTheme-royalblue">Royal Blue</option>
-                  <option value="slateblue" class="cusTheme-slateblue">Slate Blue</option>
-                  <option value="skyblue" class="cusTheme-skyblue">Skyblue</option>
-                  <option value="teal" class="cusTheme-teal">Teal</option>
-                </select>
-              </div>
-
-              <input class="col mb-2 form-control" name="keywords" placeholder="Keywords" required />
-
-              <div class="row justify-content-center px-md-5 pt-3">
-                <button type="submit" class="btn btn-primary col col-md-2 mx-md-5 mx-2">Create</button>
-                <button type="button" onclick="addModalToggle()" class="btn btn-danger col col-md-2 mx-md-5 mx-2">Cancel</button>
-              </div>
-            </form>
+            <button onclick="deleteTotalToggle()">
+              <svg viewBox="0 0 384 384">
+                <path
+                  d="M64,341.333C64,364.907,83.093,384,106.667,384h170.667C300.907,384,320,364.907,320,341.333v-256H64V341.333z" />
+                <polygon
+                  points="266.667,21.333 245.333,0 138.667,0 117.333,21.333 42.667,21.333 42.667,64 341.333,64 341.333,21.333 			" />
+              </svg>
+            </button>
           </div>
-        </div>
+        </header>
 
-        <div onclick="addModalToggle()"></div>
+        <!-- logs content -->
+        <div id="allLogsContainer" class="font_Comic"> </div>
       </div>
+    </div>
 
-      <!-- Info Modal -->
-      <div id="infoModalContainer" eleID="">
-        <div onclick="infoModalToggle()"></div>
-        <div class="infoModal font_Comic" id="infoModal">
-          <button class="closeBtn" onclick="infoModalToggle()">
-            <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
-            </svg>
-          </button>
-          <span>Keywords : </span>
-          <br />
-          <span id="keywords">empty</span>
-          <form id="addKeywords">
-            <input placeholder="Keyword Here" />
-            <button type="submit">Add/Delete</button>
+    <!-- Add Modal -->
+    <div id="addModalContainer">
+      <div class="modalMain px-md-5" id="modalMain">
+        <div class="container px-md-5 py-4 font_Comic">
+          <div class="h4 text-center border-bottom mt-3">New Log</div>
+          <form class="container p-4" id="CreateLogForm">
+            <input class="col mb-3 form-control" name="logName" placeholder="Log Name" maxlength="15" required />
+
+            <textarea name="description" class="col mb-2 form-control" rows="2" placeholder="Description"
+              maxlength="150" required></textarea>
+
+            <div class="form-group mb-2 d-flex">
+              <label class="mr-3 col-form-label">Color : </label>
+              <select id="newLogColor" class="col">
+                <option value="">None</option>
+                <option value="darkcyan" class="cusTheme-darkcyan">Dark Cyan</option>
+                <option value="darkorchid" class="cusTheme-darkorchid">Dark Orchid</option>
+                <option value="darkturquoise" class="cusTheme-darkturquoise">Dark Turquoise</option>
+                <option value="deeppink" class="cusTheme-deeppink">Deep Pink</option>
+                <option value="deepskyblue" class="cusTheme-deepskyblue">Deep Skyblue</option>
+                <option value="forestgreen" class="cusTheme-forestgreen">Forest Green</option>
+                <option value="goldenrod" class="cusTheme-goldenrod">Golden</option>
+                <option value="indigo" class="cusTheme-indigo">Indigo</option>
+                <option value="mediumseagreen" class="cusTheme-mediumseagreen">Sea Green</option>
+                <option value="orange" class="cusTheme-orange">Orange</option>
+                <option value="royalblue" class="cusTheme-royalblue">Royal Blue</option>
+                <option value="slateblue" class="cusTheme-slateblue">Slate Blue</option>
+                <option value="skyblue" class="cusTheme-skyblue">Skyblue</option>
+                <option value="teal" class="cusTheme-teal">Teal</option>
+              </select>
+            </div>
+
+            <input class="col mb-2 form-control" name="keywords" placeholder="Keywords" required />
+
+            <div class="row justify-content-center px-md-5 pt-3">
+              <button type="submit" class="btn btn-primary col col-md-2 mx-md-5 mx-2">Create</button>
+              <button type="button" onclick="addModalToggle()"
+                class="btn btn-danger col col-md-2 mx-md-5 mx-2">Cancel</button>
+            </div>
           </form>
         </div>
       </div>
 
-      <!-- confirm delete Modal -->
-      <div id="deleteModalContainer">
-        <div onclick="deleteTotalToggle()"></div>
-        <div class="deleteModal font_Comic" id="deleteModal">
-          <h4 class="text-danger mx-auto">Delete</h4>
-          <span>Type <strong id="safeword" class="text-danger"></strong> to enable delete button</span>
-          <br />
-          <input placeholder="Type Id here" onkeyup="checkIdToDelete(this)" />
-          <div class="d-flex justify-content-around">
-            <button class="btn btn-danger" id="deleteBtn" onclick="deleteTotalLog()" disabled="ture">Delete</button>
-            <button class="btn btn-primary" onclick="deleteTotalToggle()">Cancel</button>
-          </div>
-        </div>
+      <div onclick="addModalToggle()"></div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModalContainer" eleID="">
+      <div onclick="infoModalToggle()"></div>
+      <div class="infoModal font_Comic" id="infoModal">
+        <button class="closeBtn" onclick="infoModalToggle()">
+          <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
+            </path>
+          </svg>
+        </button>
+        <span>Keywords : </span>
+        <br />
+        <span id="keywords">empty</span>
+        <form id="addKeywords">
+          <input placeholder="Keyword Here" />
+          <button type="submit">Add/Delete</button>
+        </form>
       </div>
     </div>
 
-    <script src="JS/app.js"></script>
+    <!-- confirm delete Modal -->
+    <div id="deleteModalContainer">
+      <div onclick="deleteTotalToggle()"></div>
+      <div class="deleteModal font_Comic" id="deleteModal">
+        <h4 class="text-danger mx-auto">Delete</h4>
+        <span>Type <strong id="safeword" class="text-danger"></strong> to enable delete button</span>
+        <br />
+        <input placeholder="Type Id here" onkeyup="checkIdToDelete(this)" />
+        <div class="d-flex justify-content-around">
+          <button class="btn btn-danger" id="deleteBtn" onclick="deleteTotalLog()" disabled="ture">Delete</button>
+          <button class="btn btn-primary" onclick="deleteTotalToggle()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+  <script src="JS/app.js"></script>
 
-    <script>
-      var firebaseConfig = {
-        apiKey: "AIzaSyCS4XqcN3PxEtKGZleCO1ZIefr_3-iWn64",
-        authDomain: "logs-353b7.firebaseapp.com",
-        projectId: "logs-353b7",
-        storageBucket: "logs-353b7.appspot.com",
-        messagingSenderId: "159152054746",
-        appId: "1:159152054746:web:be7088b12a5c2d1502a0e3",
-      };
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-      firebase.firestore().enablePersistence();
-    </script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
 
-    <script>
-      var email = localStorage.getItem("key1");
-      var pwd = localStorage.getItem("key2");
-      firebase.auth().signInWithEmailAndPassword(email, pwd);
-    </script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCS4XqcN3PxEtKGZleCO1ZIefr_3-iWn64",
+      authDomain: "logs-353b7.firebaseapp.com",
+      projectId: "logs-353b7",
+      storageBucket: "logs-353b7.appspot.com",
+      messagingSenderId: "159152054746",
+      appId: "1:159152054746:web:be7088b12a5c2d1502a0e3",
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    firebase.firestore().enablePersistence();
+  </script>
 
-    <script src="JS/getLogsNav.js"></script>
-    <script src="JS/home.js"></script>
-    <script src="JS/RWLogs.js"></script>
-    <script src="JS/searchBar.js"></script>
-  </body>
+  <script>
+    var email = localStorage.getItem("key1");
+    var pwd = localStorage.getItem("key2");
+    var user_id = localStorage.getItem("id");
+    async function login() {
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email, pwd);
+        localStorage.setItem("id", firebase.auth().currentUser.uid)
+      } catch (error) {
+        console.log(error.message)
+      }
+
+    }
+    login();
+
+
+  </script>
+
+  <script src="JS/getLogsNav.js"></script>
+  <script src="JS/home.js"></script>
+  <script src="JS/RWLogs.js"></script>
+  <script src="JS/searchBar.js"></script>
+</body>
+
 </html>
